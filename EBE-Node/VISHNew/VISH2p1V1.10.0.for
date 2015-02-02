@@ -269,7 +269,8 @@ C======output the chemical potential information at freeze out surface.====
       open(83,FILE='results/SurfaceY.dat',FORM='FORMATTED',
      &     STATUS='REPLACE')         !output the freeze-out surface along y-axis
       open(91,File='results/Temp.dat',status='REPLACE')
-      open(93,File='results/Temp_evo.dat',status='REPLACE')
+      open(93,File='results/Temp_evoX.dat',status='REPLACE')
+      open(94,File='results/Temp_evoY.dat',status='REPLACE')
       open(90,File='results/APi.dat',status='REPLACE')
       open(89,File='results/AScource.dat',status='REPLACE')
       open(88,File='results/AScource2.dat',status='REPLACE')
@@ -337,6 +338,7 @@ CSHEN======output OSCAR file Header end=====================================
       Close(98)
       Close(99)
       Close(93)
+      Close(94)
       Close(81)
       Close(82)
       Close(83)
@@ -1234,6 +1236,17 @@ C       endif
 C     &                       Ed(I,J,NZ0)*Hc, DKn
       enddo
       enddo
+
+CPLUMBERG===begin===================================================================
+      Do J=NXPhy0,NXPhy,1
+      Do I=0,NYPhy,NYPhy+1
+        ViscousC = ViscousCTemp(Temp(I,J,NZ0))
+        ExpRate = GlobalTheta(I,J,NZ0)
+        DKn=ExpRate*ViscousC/Temp(I,J,NZ0)
+        write(94, '(5e15.5)')Time, I*DX, J*DY, Temp(I,J,NZ0)*HBarC, DKn
+      enddo
+      enddo
+CPLUMBERG===end=====================================================================
 
       DO 203 I=0,NXPhy,20
          Write(*,'(500e12.3)')(Temp(I,J,NZ0)*Hc,J=0,NYPhy,20 )

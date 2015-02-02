@@ -14,7 +14,7 @@ do
 	#bash background_driver.sh $idx PlayGround/copy`echo $idx` &
         #bash background_driver_alternate.sh $idx PlayGround/copy`echo $idx` &
 	bash background_driver_etaBYs_of_T.sh $idx PlayGround/copy`echo $idx` &
-	#bash background_driver_etaBYs_of_T_AVG.sh PlayGround/copy`echo $idx` &
+	#bash background_driver_etaBYs_of_T_AVG.sh $idx PlayGround/copy`echo $idx` &
 done
 
 wait

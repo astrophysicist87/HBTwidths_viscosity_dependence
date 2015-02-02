@@ -43,9 +43,10 @@ def get_slope_2D(v, idx):
     return slope
 
 allXresults = empty([1, 2, npts])
+processingStem = 'nnINDEXED'				# tauSORTED, tauINDEXED, nnSORTED, or nnINDEXED
 
-meansurfXdatafile = 'testfinalX.out_%(npts)dpts' % {"npts": npts}
-meansurfXdata = loadtxt(meansurfXdatafile)[:, 0:2]
+meansurfXdatafile = 'mean_transverseflowprofile_%(pStem)s_%(numpts)dpts.out' % {"numpts": npts, "pStem": processingStem}
+meansurfXdata = loadtxt(meansurfXdatafile)[:, 1:3]
 
 runningsum = zeros(npts)
 runningsum2 = zeros(npts)
@@ -54,7 +55,8 @@ vardists = zeros(npts)
 
 for event in xrange(1, nevs+1):
     print 'Incorporating files from results-%(event)d/...' % {"event": event}
-    surfXdatafile = 'results-%(event)d/vT_vs_X_INDEXED.out' % {"event": event}
+    #surfXdatafile = 'results-%(event)d/vT_vs_X_INDEXED.out' % {"event": event}
+    surfXdatafile = 'results-%(event)d/vT_vs_X_%(pStem)s.out' % {"event": event, "pStem": processingStem}
     surfXdata = loadtxt(surfXdatafile)[:, cols]
 
     indicesX=mgrid[(min(surfXdata[:,0])+eps):(max(surfXdata[:,0])-eps):(npts)*(1j)]	# the two extra points will be deleted
@@ -112,15 +114,15 @@ for i in xrange(npts):
 
 phivec = arctan(meannormals)
 
-#sigmadists = zeros(sigmadists.shape) + 0.05
-
 possigma = nan_to_num(vstack((sigmadists*cos(phivec),sigmadists*sin(phivec))).transpose())
 
 print possigma
 
 finalXout = hstack((meansurfXdata, meansurfXdata+possigma, meansurfXdata-possigma))
 
-savetxt('REPROCESSED_testfinalX.out_%(numpts)dpts' % {"numpts": npts},asarray(finalXout))
+outfile = 'variance_transverseflowprofile_%(pStem)s_%(numpts)dpts.out' % {"numpts": npts, "pStem": processingStem}
 
+#savetxt('REPROCESSED_testfinalX.out_%(numpts)dpts' % {"numpts": npts},asarray(finalXout))
+savetxt(outfile,asarray(finalXout))
 
 print 'Finished all.'

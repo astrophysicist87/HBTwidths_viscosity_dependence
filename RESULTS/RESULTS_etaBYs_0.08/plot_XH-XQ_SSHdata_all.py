@@ -22,7 +22,7 @@ def generate_all_plots():
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = 3.5, 12.5
+	ylower, yupper = 3.0, 16.0
 	pclower, pcupper = -10.0, 100.0
 	
 	ax1 = fig.add_subplot(221)
@@ -55,7 +55,7 @@ def generate_all_plots():
 	
 	# R2o
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = 4.5, 32.5
+	ylower, yupper = 4.0, 32.5
 	pclower, pcupper = -25.0, 25.0
 	
 	ax2 = fig.add_subplot(222)
@@ -160,9 +160,9 @@ def generate_all_plots():
 	ax4.legend(loc='center right')
 	# end of R2ol
 	
-	#plt.show()
+	plt.show()
 	#plt.savefig('R2ijSSH_vs_TDEPVX_w_insets.pdf', format='pdf')
-	plt.savefig('R2ijSSH_vs_TDEPVX.pdf', format='pdf')
+	#plt.savefig('R2ijSSH_vs_TDEPVX.pdf', format='pdf')
 
 
 

@@ -38,9 +38,10 @@ def generate_Temp_evo_plots(event, TdepVX):
 	cb.set_label(r'$T$ (GeV)', fontsize=plotfontsize)
 	ax.set_xlabel(r'$x$ (fm)', {'fontsize': plotfontsize})
 	ax.set_ylabel(r'$\tau$ (fm/$c$)', {'fontsize': plotfontsize})
-	ax.set_title('Temperature evolution for %(ebsP)s at $y=z=0$ fm' % {"ebsP": etaBYsParams[TdepVX-1]})
+	ax.set_title('Temperature evolution for %(ebsP)s at $y=z=0$ fm (single event)' % {"ebsP": etaBYsParams[TdepVX-1]})
 	#plt.show()
 	plt.savefig('Temp_V%(TV)d_evo_transition_ev%(event)d.pdf' % {"event": event, "TV": TdepVX}, format='pdf')
+	print 'Generated Temp_V%(TV)d_evo_transition_ev%(event)d.pdf' % {"event": event, "TV": TdepVX}
 
 
 
@@ -52,9 +53,10 @@ def generate_Temp_evo_avg_plots(TdepVX):
 	fig = plt.figure()
 	ax = fig.add_subplot(111)
 	#data=np.loadtxt('NEW_TDEP_V%(TV)d/NEW_TDEP_V%(TV)d_results-avg-1/Temp_evo.dat' % {"TV": TdepVX})
-	data=np.loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy4/VISHNew/TV%(TV)d_results-avg-10000/Temp_evo.dat' % {"TV": TdepVX})
-	points=np.vstack((data[:,1],data[:,0])).T
-	vals=data[:,3]		# temperature T(x,y=0,z=0,t)
+	data=np.loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/RESULTS/RESULTS_etaBYs_0.08/NEW_TDEP_V%(TV)d/NEW_TDEP_V%(TV)d_results-avg-1/Temp_evoY.dat' % {"TV": TdepVX})
+	#points=np.vstack((data[:,1],data[:,0])).T	# x directions
+	points=np.vstack((data[:,2],data[:,0])).T	# y directions
+	vals=data[:,3]		# temperature T(x=0,y,z=0,t)
 	#vals=data[:,4]		# Knudsen number Kn(x,y=0,z=0,t)
 	setmaskarray=np.zeros(len(data[:,4]))
 	setmaskarray[np.where(data[:,4] >= 10.0)]=1.0
@@ -63,8 +65,8 @@ def generate_Temp_evo_avg_plots(TdepVX):
 	maskedvals
 	mintau=min(data[:,0])
 	maxtau=max(data[:,0])
-	minx=min(data[:,1])
-	maxx=max(data[:,1])
+	minx=min(data[:,2])	# col=1 corresponds to x, col=2 correspond to y
+	maxx=max(data[:,2])	# col=1 corresponds to x, col=2 correspond to y
 	npts=1000
 	grid_x, grid_tau = np.mgrid[minx:maxx:npts*(1j), mintau:maxtau:npts*(1j)]
 	grid_T = griddata(points, vals, (grid_x, grid_tau), method=interpolationmethod)
@@ -79,19 +81,21 @@ def generate_Temp_evo_avg_plots(TdepVX):
 	cb = plt.colorbar(cs, orientation = 'vertical', cax=cax)
 	#cb.set_label(r'$Kn \equiv \frac{\eta\, \theta}{s\, T}$', fontsize=plotfontsize)
 	cb.set_label(r'$T$ (GeV)', fontsize=plotfontsize)
-	ax.set_xlabel(r'$x$ (fm)', {'fontsize': plotfontsize})
+	ax.set_xlabel(r'$y$ (fm)', {'fontsize': plotfontsize})
 	ax.set_ylabel(r'$\tau$ (fm/$c$)', {'fontsize': plotfontsize})
 	#ax.set_title('Knudsen number for %(ebsP)s at $y=z=0$ fm (SSH)' % {"ebsP": etaBYsParams[TdepVX-1]})
-	plt.show()
-	#plt.savefig('Temp_V%(TV)d_evo_transition_SSHavg.pdf' % {"TV": TdepVX}, format='pdf')
+	ax.set_title('Temperature profile for %(ebsP)s at $x=z=0$ fm (SSH)' % {"ebsP": etaBYsParams[TdepVX-1]})
+	#plt.show()
+	plt.savefig('Temp_V%(TV)d_evo_transition_SSHavg.pdf' % {"TV": TdepVX}, format='pdf')
 	#plt.savefig('KN_TdepV%(TV)d_evo_SSHavg.pdf' % {"TV": TdepVX}, format='pdf')
+	print 'Generated Temp_V%(TV)d_evo_transition_SSHavg.pdf' % {"TV": TdepVX}
 
 
 
 if __name__ == "__main__":
 	for TVidx in range(5)[1:]:
-		#generate_Temp_evo_plots(759, TVidx)
-		generate_Temp_evo_avg_plots(TVidx)
+		generate_Temp_evo_plots(759, TVidx)
+		#generate_Temp_evo_avg_plots(TVidx)
 
 
 

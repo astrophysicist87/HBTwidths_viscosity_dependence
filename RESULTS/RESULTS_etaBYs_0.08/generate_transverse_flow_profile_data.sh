@@ -40,7 +40,7 @@ do
 	awk '{printf NR"   "; for (i=2; i<=NF; i++) {printf $i"   "}; printf "\n"}' $tauSortedSurfaceFile > $tauIndexedSurfaceFile
 done
 
-
+python get_mean_and_variance_transverseflowprofile.py &>> $outfile
 
 
 

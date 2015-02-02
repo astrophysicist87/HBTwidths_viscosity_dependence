@@ -45,19 +45,21 @@ interpresults2 = empty(len(cols))
 longervec = longer(surfXdataBINNEDposY, surfXdataBINNEDnegY)
 shortervec = shorter(surfXdataBINNEDposY, surfXdataBINNEDnegY)
 
-for i in xrange(len(longervec)):
-	ith_entry = longervec[i,:]
-	ith_nn_idx, ith_nn = find_nearest_neighbor(ith_entry, shortervec)
-	interpresults1 = vstack((interpresults1, my_interp(longervec[i], shortervec[ith_nn_idx], 0, 3)))	# interpolate over column 3 to value 0
+#for i in xrange(len(longervec)):
+#	ith_entry = longervec[i,:]
+#	ith_nn_idx, ith_nn = find_nearest_neighbor(ith_entry, shortervec)
+#	interpresults1 = vstack((interpresults1, my_interp(longervec[i], shortervec[ith_nn_idx], 0, 3)))	# interpolate over column 3 to value 0
 
 for i in xrange(len(shortervec)):
 	ith_entry = shortervec[i,:]
 	ith_nn_idx, ith_nn = find_nearest_neighbor(ith_entry, longervec)
 	interpresults2 = vstack((interpresults2, my_interp(shortervec[i], longervec[ith_nn_idx], 0, 3)))	# interpolate over column 3 to value 0
+	#longervec = delete(longervec, ith_nn_idx, 0)
 
-interpresults1 = delete(interpresults1,0,0)
+#interpresults1 = delete(interpresults1,0,0)
 interpresults2 = delete(interpresults2,0,0)
-interpresultsALL = vstack((interpresults1, interpresults2))
+#interpresultsALL = vstack((interpresults1, interpresults2))
+interpresultsALL = interpresults2
 
 interpresultsallCOPY = interpresultsALL
 

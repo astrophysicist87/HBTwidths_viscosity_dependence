@@ -22,34 +22,21 @@ def delete_endpoints(v):				# deletes endpoints of v
 allXresults = empty([1, 3, npts])
 allYresults = empty([1, 3, npts])
 
+processingStem = 'nnINDEXED'				# tauSORTED, tauINDEXED, nnSORTED, or nnINDEXED
+#processStem = sys.argv[1]				# get it from command-line
+
 for event in xrange(1, nevs+1):
     print 'Incorporating files from results-%(event)d/...' % {"event": event}
-    #surfXdatafile = 'results-%(event)d/vT_vs_X_INDEXED.out' % {"event": event}
-    #surfXdatafile = 'results-%(event)d/SurfaceX.dat' % {"event": event}
-    surfXdatafile = 'results-%(event)d/vT_vs_X_tauSORTED.out' % {"event": event}
+    #surfXdatafile = 'results-%(event)d/vT_vs_X_tauINDEXED.out' % {"event": event}
+    surfXdatafile = 'results-%(event)d/vT_vs_X_%(pStem)s.out' % {"event": event, "pStem": processingStem}
 
     surfXdata=loadtxt(surfXdatafile)
 
-    #print 'Read in data for event', event,'. . .'
-
-    #conditionX = surfXdata[:,2]>=0			# select x >= 0
-
-    #surfX_gt_0 = array([extract(conditionX, surfXdata[:,i]) for i in cols]).transpose()
-
-    #print surfXdata.shape, surfX_gt_0.shape
     surfX_gt_0 = surfXdata
 
-    #surfX_gt_0=surfX_gt_0[lexsort((surfX_gt_0[:,2],surfX_gt_0[:,1],surfX_gt_0[:,0]))]
-
     tauXpts=mgrid[(min(surfX_gt_0[:,0])+eps):(max(surfX_gt_0[:,0])-eps):(npts)*(1j)]	# the two extra points will be deleted
-    #tauXpts = delete_endpoints(tauXpts)
     gridXrpts = griddata(surfX_gt_0[:,0],surfX_gt_0[:,2],tauXpts,method=interpolationmethod)
     gridXvpts = griddata(surfX_gt_0[:,0],surfX_gt_0[:,1],tauXpts,method=interpolationmethod)
-
-    # delete interpolated endpoints, tends to cause problems
-    #tauXpts = delete_endpoints(tauXpts)
-    #gridXrpts = delete_endpoints(gridXrpts)
-    #gridXvpts = delete_endpoints(gridXvpts)
 
     # check if there are any NaN's left
     if vector_has_nans(gridXrpts):
@@ -68,40 +55,14 @@ for event in xrange(1, nevs+1):
         print find_nans_in_vector(surfX_gt_0[:,0]), find_nans_in_vector(surfX_gt_0[:,2]), find_nans_in_vector(tauXpts)
         raw_input("Press [enter] to continue.")
 
-    #print '. . . finished interpolation for event', event
-
-    #print '. . . generating interpolated points for event', event
-
     allXresults = vstack((allXresults, array([vstack((tauXpts, gridXrpts, gridXvpts))])))
-
-    #print '. . . finished processing event', event
 
 allXresults = delete(allXresults,0,0)
 
-#print 'Finished processing all events --> statistics . . .'
+Xmeans = mean(allXresults,axis=0)
 
-finalXout = empty([1, 6])
+outfile = 'mean_transverseflowprofile_%(pStem)s_%(numpts)dpts.out' % {"numpts": npts, "pStem": processingStem}
 
-Xmeans = mean(allXresults[:,1:3,:],axis=0)
-Xsigmas = std(allXresults[:,1:3,:],axis=0)
-
-for iX in xrange(npts):
-    slope, intercept, r_value, p_value, std_err = stats.linregress(allXresults[:,1,iX],allXresults[:,2,iX])
-    #print 'Found r =', r_value, 'at iX =', iX
-    if isnan(r_value):
-        print 'Found r = nan at iX =', iX
-    if slope < 0:
-        sigpts = array([-Xsigmas[0,iX], Xsigmas[1,iX], Xsigmas[0,iX], -Xsigmas[1,iX]])
-    else:
-        sigpts = array([Xsigmas[0,iX], Xsigmas[1,iX], -Xsigmas[0,iX], -Xsigmas[1,iX]])
-    finalXout = vstack((finalXout,hstack((Xmeans[:,iX], sigpts))))
-
-finalXout = delete(finalXout,0,0)
-
-#for iX in xrange(npts):
-#	for event in xrange(nevs):
-#		print allXresults[event,1,iX], allXresults[event,2,iX]
-
-savetxt('testfinalX.out_%(numpts)dpts' % {"numpts": npts},asarray(finalXout))
+savetxt(outfile,asarray(Xmeans))
 
 print 'Finished all.'

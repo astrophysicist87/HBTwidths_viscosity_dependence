@@ -12,6 +12,7 @@ from subprocess import call
 #nevs = 1000
 initialevent = 1
 eps = 0.000001
+TdepV = 2
 
 def generate_FOsurface_plots(event, localpT):
 	# set-up
@@ -26,13 +27,15 @@ def generate_FOsurface_plots(event, localpT):
 	
 	# load data
 	#direc = 'NEW_TDEP_V3/NEW_TDEP_V3_results-avg-%(event)d' % {"event": event}
-	direc = '/home/plumberg.1/HBTwidths_viscosity_dependence/RESULTS/RESULTS_etaBYs_0.08/NEW_TDEP_V1/NEW_TDEP_V1_results-%(event)d' % {"event": event}
+	#direc = '/home/plumberg.1/HBTwidths_viscosity_dependence/RESULTS/RESULTS_etaBYs_0.08/NEW_TDEP_V%(TV)d/NEW_TDEP_V%(TV)d_results-%(event)d' % {"event": event, "TV": TdepV}
+	direc = '/home/plumberg.1/HBTwidths_viscosity_dependence/RESULTS/RESULTS_etaBYs_0.08/NEW_TDEP_V%(TV)d/NEW_TDEP_V%(TV)d_results-avg-1' % {"TV": TdepV}
 	#cols = [1, 2, 3, 11, 12]
 	#commandstring = 'paste ' + direc + '/surface.dat ' + direc + '/decdat2.dat > NEW_TDEP_V4_generate_FOsurface_plots_w_avgS_ev' + event + '.temp'
 	#commandstring = 'paste ' + direc + '/surface.dat ' + direc + '/decdat2.dat > generate_FOsurface_plots_w_avgS_ev' + str(event) + '.temp'
 	#print 'Running:', commandstring
 	#return_code = call(commandstring, shell=True)
-	fileToProcess = direc + '/averaged_S_on_FOsurface_ev%(event)d.dat' % {"event": event}
+	#fileToProcess = direc + '/averaged_S_on_FOsurface_ev%(event)d.dat' % {"event": event}
+	fileToProcess = direc + '/averaged_S_on_FOsurface_ev1.dat'
 	data = loadtxt(fileToProcess)
 	
 	# set-up data
@@ -46,7 +49,7 @@ def generate_FOsurface_plots(event, localpT):
 	rT = sqrt(xT**2 + yT**2)
 	
 	# plot results
-	print norm, min(avgS), max(avgS)
+	#print norm, min(avgS), max(avgS)
 	ax.scatter(xT, yT, tau, s=20.0*((avgS-min(avgS))/(max(avgS)-min(avgS))), c=((avgS-min(avgS))/(max(avgS)-min(avgS))), alpha=0.5, edgecolor='')
 	#ax.scatter(xT, yT, tau, s=50000.0*avgS/norm, c=avgS/norm, alpha=0.5, edgecolor='')
 	ax.axis([xlower, xupper, ylower, yupper])

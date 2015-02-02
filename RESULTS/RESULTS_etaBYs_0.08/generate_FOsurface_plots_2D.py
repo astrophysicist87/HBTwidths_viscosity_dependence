@@ -10,6 +10,7 @@ from subprocess import call
 
 nevs = 1000
 initialevent = 1
+TdepV = 2
 
 def generate_FOsurface_plots(event):
 	# set-up
@@ -58,12 +59,12 @@ def generate_avgFOsurface_plots():
 	ylower, yupper = 0.0, 12.0
 	
 	# load data
-	direc = 'NEW_TDEP_V4/NEW_TDEP_V4_results-avg-1'
+	direc = 'NEW_TDEP_V%(TV)d/NEW_TDEP_V%(TV)d_results-avg-1' % {"TV": TdepV}
 	cols = [1, 2, 3, 11, 12]
-	commandstring = 'paste ' + direc + '/surface.dat ' + direc + '/decdat2.dat > NEW_TDEP_V4_generate_avgFOsurface_plots.temp'
+	commandstring = 'paste ' + direc + '/surface.dat ' + direc + '/decdat2.dat > NEW_TDEP_V%(TV)d_generate_avgFOsurface_plots.temp' % {"TV": TdepV}
 	#print 'Running:', commandstring
 	return_code = call(commandstring, shell=True)
-	fileToProcess = 'NEW_TDEP_V4_generate_avgFOsurface_plots.temp'
+	fileToProcess = 'NEW_TDEP_V%(TV)d_generate_avgFOsurface_plots.temp' % {"TV": TdepV}
 	data = loadtxt(fileToProcess)[:,cols]
 	
 	vT = sqrt(data[:,3]**2+data[:,4]**2)
@@ -77,8 +78,8 @@ def generate_avgFOsurface_plots():
 	plt.scatter(xT, tau, s=50.0, c=((avT-min(avT))/(max(avT)-min(avT))), alpha=0.5, edgecolor='')
 	ax.axis([xlower, xupper, ylower, yupper])
 	plt.colorbar()
-	#plt.show()
-	plt.savefig('NEW_TDEP_V4/avg_FOsurface.pdf', format='pdf')
+	plt.show()
+	#plt.savefig('NEW_TDEP_V%(TV)d/avg_FOsurface.pdf' % {"TV": TdepV}, format='pdf')
 
 
 
@@ -87,7 +88,7 @@ def generate_avgFOsurface_plots():
 
 
 if __name__ == "__main__":
-	generate_FOsurface_plots(759)
+	#generate_FOsurface_plots(759)
 	generate_avgFOsurface_plots()
 
 
