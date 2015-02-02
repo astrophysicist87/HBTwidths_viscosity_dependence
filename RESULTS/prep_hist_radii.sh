@@ -65,7 +65,7 @@ else
 		fnR2l0KTval="$direc/R2l0_kt_`echo $KT`_`echo $nevs`evs.input"
 		fnR2ol0KTval="$direc/R2ol0_kt_`echo $KT`_`echo $nevs`evs.input"
 		for((ev=1; ev<=$nevs; ev++))
-    	do
+    		do
 			awk -v akt=$KT '$2==akt && $3==0 {print $4}' $direc/`echo $subdirec`-`echo $ev`/HBTradii_cfs_ev`echo $ev`.dat >> $fnR2s0KTval
 			awk -v akt=$KT '$2==akt && $3==0 {print $6}' $direc/`echo $subdirec`-`echo $ev`/HBTradii_cfs_ev`echo $ev`.dat >> $fnR2o0KTval
 			awk -v akt=$KT '$2==akt && $3==0 {print $10}' $direc/`echo $subdirec`-`echo $ev`/HBTradii_cfs_ev`echo $ev`.dat >> $fnR2l0KTval
@@ -77,9 +77,9 @@ else
 		echo '   eta/s =' $ebs': Time to average now...'
 
 		meanR2s0KTval=`mean $fnR2s0KTval`
-        meanR2o0KTval=`mean $fnR2o0KTval`
-        meanR2l0KTval=`mean $fnR2l0KTval`
-        meanR2ol0KTval=`mean $fnR2ol0KTval`
+        	meanR2o0KTval=`mean $fnR2o0KTval`
+		meanR2l0KTval=`mean $fnR2l0KTval`
+		meanR2ol0KTval=`mean $fnR2ol0KTval`
 
 		echo '   eta/s =' $ebs': Made it through averages!'
 		echo '   eta/s =' $ebs': Normalizing radii...'
