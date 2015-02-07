@@ -27,10 +27,10 @@ then
 			m4=`mean $infile 4`
 			m5=`mean $infile 5`
 			m6=`mean $infile 6`
-	        m7=`mean $infile 7`
-	        m8=`mean $infile 8`
-	        m9=`mean $infile 9`
-	        m10=`mean $infile 10`
+			m7=`mean $infile 7`
+			m8=`mean $infile 8`
+			m9=`mean $infile 9`
+			m10=`mean $infile 10`
 	
 			v1=`variance $infile 1`
 			v2=`variance $infile 2`
@@ -39,9 +39,9 @@ then
 			v5=`variance $infile 5`
 			v6=`variance $infile 6`
 			v7=`variance $infile 7`
-	        v8=`variance $infile 8`
-	        v9=`variance $infile 9`
-	        v10=`variance $infile 10`
+			v8=`variance $infile 8`
+			v9=`variance $infile 9`
+			v10=`variance $infile 10`
 	
 			echo $KTval $m1 $m2 $m3 $m4 $m5 $m6 $m7 $m8 $m9 $m10 $v1 $v2 $v3 $v4 $v5 $v6 $v7 $v8 $v9 $v10 >> $outfile
 
@@ -66,10 +66,10 @@ else
 		m4=`mean $infile 4`
 		m5=`mean $infile 5`
 		m6=`mean $infile 6`
-        m7=`mean $infile 7`
-        m8=`mean $infile 8`
-        m9=`mean $infile 9`
-        m10=`mean $infile 10`
+		m7=`mean $infile 7`
+		m8=`mean $infile 8`
+		m9=`mean $infile 9`
+		m10=`mean $infile 10`
 
 		v1=`variance $infile 1`
 		v2=`variance $infile 2`
@@ -78,9 +78,9 @@ else
 		v5=`variance $infile 5`
 		v6=`variance $infile 6`
 		v7=`variance $infile 7`
-        v8=`variance $infile 8`
-        v9=`variance $infile 9`
-        v10=`variance $infile 10`
+		v8=`variance $infile 8`
+		v9=`variance $infile 9`
+		v10=`variance $infile 10`
 
 		echo $KTval $m1 $m2 $m3 $m4 $m5 $m6 $m7 $m8 $m9 $m10 $v1 $v2 $v3 $v4 $v5 $v6 $v7 $v8 $v9 $v10 >> $outfile
 

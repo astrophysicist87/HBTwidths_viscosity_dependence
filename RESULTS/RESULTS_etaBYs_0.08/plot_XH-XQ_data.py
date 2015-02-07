@@ -181,7 +181,7 @@ def generate_v2_plots():
 	
 	#set axes limits
 	xlower, xupper = 0.0, 3.0
-	ylower, yupper = 0.0, 0.08
+	ylower, yupper = 0.0, 0.07
 	
 	#R2o
 	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_results-avg-1/v2_pTdiff_ev1.dat')[:,[1,2]]
@@ -202,7 +202,7 @@ def generate_v2_plots():
 	ax.legend(loc=2)
 	
 	#plt.show()
-	plt.savefig('v2SSH_vs_TDEPVX_w_corrections.pdf', format='pdf')
+	plt.savefig('v2SSH_vs_TDEPVX.pdf', format='pdf')
 
 
 

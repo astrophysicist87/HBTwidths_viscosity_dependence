@@ -711,10 +711,17 @@ class EbeCollector(object):
                 if data_row_count>0:
                     # still have data to read
                     try:
-                        p0, px, py, pz = map(lambda x: float(x.replace("D","E")), aLine[98:193].split())
-                        t, x, y, z = map(lambda x: float(x.replace("D","E")), aLine[245:338].split())
-                        isospin2 = int(aLine[222:224])
-                        pid = int(aLine[216:222])
+                        # for UrQMD 2.3
+                        #p0, px, py, pz = map(lambda x: float(x.replace("D","E")), aLine[98:193].split())
+                        #t, x, y, z = map(lambda x: float(x.replace("D","E")), aLine[245:338].split())
+                        #isospin2 = int(aLine[222:224])
+                        #pid = int(aLine[216:222])
+                        # for UrQMD 3.3
+                        p0, px, py, pz = map(lambda x: float(x), aLine[65:128].split())
+                        t, x, y, z = map(lambda x: float(x), aLine[181:243].split())
+                        isospin2 = int(aLine[157:159])
+                        pid = int(aLine[151:157])
+
                         UrQMDpid = pid + isospin2*1000
                         try:
                             if pid == 100 and isospin2 != 0: 
@@ -725,7 +732,7 @@ class EbeCollector(object):
                         except ValueError as e:
                             print("Can not find particle id in the dictionary!")
                             exit(e)
-                        if UrQMDpid in pid_to_collect:
+                        if self.pidDict[self.UrQMDpidDict[UrQMDpid]] in pid_to_collect:
                             rap = 0.5*math.log((p0 + pz)/(p0 - pz))
                             if rap < rap_range[1] and rap > rap_range[0]:
                                 pT = math.sqrt(px*px + py*py)
@@ -1193,7 +1200,7 @@ class EbeDBReader(object):
         if where:
             whereClause += " and " + where
         RawdiffvnData = np.asarray(self.db.selectFromTable("diff_vn", ("pT", "vn_real", "vn_imag"), whereClause=whereClause, orderByClause=orderBy))
-        nevent = self.getNumberOfEvents()
+        nevent = self.getNumberOfEvents(particleName)
         npT = len(RawdiffvnData[:,0])/nevent
         diffvnData = RawdiffvnData.reshape(nevent, npT, 3)
         return diffvnData
@@ -1253,7 +1260,7 @@ class EbeDBReader(object):
         if where:
             whereClause += " and " + where
         RawdNdyData = np.asarray(self.db.selectFromTable("spectra", ("pT", "N"), whereClause=whereClause, orderByClause=orderBy))
-        nevent = self.getNumberOfEvents()
+        nevent = self.getNumberOfEvents(particleName)
         npT = len(RawdNdyData[:,0])/nevent
         dNdyData = RawdNdyData.reshape(nevent, npT, 2)
         return dNdyData
@@ -1293,14 +1300,14 @@ class EbeDBReader(object):
             probes.append((aParticle, numberOfEvents))
         return probes
 
-    def getNumberOfEvents(self):
+    def getNumberOfEvents(self, particleName):
         """
             Return total number of events by finding the difference between max
             and min of event_id.
         """
-        whereClause = "ecc_id = 1 and r_power = 0 and n = 2"
-        Nevent = self.db.selectFromTable("eccentricities", "count()", whereClause)
-        return Nevent[0][0]
+        pid = self._pid(particleName)
+        nevent = self.db.selectFromTable("multiplicities", "count()", "pid = %d" % pid)[0][0]
+        return nevent
 
     def evaluateExpression(self, expression):
         """

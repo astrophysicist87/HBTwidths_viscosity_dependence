@@ -15,24 +15,34 @@ def generate_all_plots():
 	fig = plt.figure()
 	fig.subplots_adjust(wspace=0.0, hspace=0.0)
 	
-	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	# CORRECT: idealdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	# CORRECT: LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	# CORRECT: LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	# CORRECT: HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	# CORRECT: HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+
+	idealdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	#idealdata2=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy1/VISHNew/results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	LHLQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy1/VISHNew/TV1_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	LHHQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy2/VISHNew/TV2_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	HHLQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy3/VISHNew/TV3_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	HHHQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy4/VISHNew/TV4_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = 3.0, 16.0
+	ylower, yupper = 3.0, 13.0
 	pclower, pcupper = -10.0, 100.0
 	
 	ax1 = fig.add_subplot(221)
 	#ax1inset = fig.add_axes([0.175, 0.55, relativesubplotsize, relativesubplotsize])
 	#ax1inset = inloc.inset_axes(ax1, width="40%", height="40%", loc=1)
-	
+
+	#ax1.plot(idealdata2[:,0], idealdata2[:,1]+0.1, linestyle='solid', color='blue', linewidth=2, label='ideal2')	
 	ax1.plot(LHLQdata[:,0], LHLQdata[:,1], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
 	ax1.plot(LHHQdata[:,0], LHHQdata[:,1], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
 	ax1.plot(HHLQdata[:,0], HHLQdata[:,1], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
 	ax1.plot(HHHQdata[:,0], HHHQdata[:,1], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	ax1.plot(idealdata[:,0], idealdata[:,1], linestyle='solid', color='black', linewidth=1, label='ideal')	
 	
 	#ax1inset.axhline(0.0, color='red', linewidth=2)
 	#ax1inset.plot(LHHQdata[:,0], relf(LHHQdata[:,1],LHLQdata[:,1]), linestyle=':', color='blue', linewidth=2)
@@ -62,10 +72,12 @@ def generate_all_plots():
 	#ax2inset = fig.add_axes([0.65, 0.65, relativesubplotsize, relativesubplotsize])
 	#ax2inset = inloc.inset_axes(ax2, width="40%", height="40%", loc=1)
 	
+	#ax2.plot(idealdata[:,0], idealdata[:,2], linestyle='solid', color='black', linewidth=2, label='ideal')	
 	ax2.plot(LHLQdata[:,0], LHLQdata[:,2], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
 	ax2.plot(LHHQdata[:,0], LHHQdata[:,2], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
 	ax2.plot(HHLQdata[:,0], HHLQdata[:,2], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
 	ax2.plot(HHHQdata[:,0], HHHQdata[:,2], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	ax2.plot(idealdata[:,0], idealdata[:,2], linestyle='solid', color='black', linewidth=1, label='ideal')	
 	
 	#ax2inset.axhline(0.0, color='red', linewidth=2)
 	#ax2inset.plot(LHHQdata[:,0], relf(LHHQdata[:,2],LHLQdata[:,2]), linestyle=':', color='blue', linewidth=2)
@@ -102,6 +114,7 @@ def generate_all_plots():
 	ax3.plot(LHHQdata[:,0], LHHQdata[:,3], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
 	ax3.plot(HHLQdata[:,0], HHLQdata[:,3], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
 	ax3.plot(HHHQdata[:,0], HHHQdata[:,3], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	ax3.plot(idealdata[:,0], idealdata[:,3], linestyle='solid', color='black', linewidth=1, label='ideal')	
 	
 	#ax3inset.axhline(0.0, color='red', linewidth=2)
 	#ax3inset.plot(LHHQdata[:,0], relf(LHHQdata[:,3],LHLQdata[:,3]), linestyle=':', color='blue', linewidth=2)
@@ -135,6 +148,7 @@ def generate_all_plots():
 	ax4.plot(LHHQdata[:,0], -LHHQdata[:,4], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
 	ax4.plot(HHLQdata[:,0], -HHLQdata[:,4], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
 	ax4.plot(HHHQdata[:,0], -HHHQdata[:,4], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	ax4.plot(idealdata[:,0], -idealdata[:,4], linestyle='solid', color='black', linewidth=1, label='ideal')	
 	
 	onezero=zeros(len(LHLQdata[:,0]))+1
 	onezero[0]=0.

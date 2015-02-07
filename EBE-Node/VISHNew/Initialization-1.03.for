@@ -4,13 +4,12 @@
 
 #define EOSDATALENGTH 155500 ! compile with -cpp option
 #define CONSTPI 3.14159265
-#define INITIALIZE_PI_TO_ZERO .false.
 
 !=======================================================================
 
       Subroutine InitializeAll(NX0,NY0,NZ0,NX,NY,NZ,
      &  NXPhy0,NYPhy0,NXPhy,NYPhy,T0,DX,DY,DZ,DT,MaxT,NDX,NDY,NDT,
-     &  TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,GTh,
+     &  TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,
      &  Pi00,Pi01,Pi02,Pi33,Pi11,Pi12,Pi22,
      &  PScT00,PScT01,PScT02,PScT33,
      &  PScT11,PScT12,PScT22,etaTtp0,etaTtp,PPI,PISc,XiTtP0,XiTtP,
@@ -39,7 +38,6 @@
 
       Dimension Vx(NX0:NX, NY0:NY, NZ0:NZ)
       Dimension Vy(NX0:NX, NY0:NY, NZ0:NZ)
-      Dimension GTh(NX0:NX, NY0:NY, NZ0:NZ)
 
       Dimension Pi00(NX0:NX, NY0:NY, NZ0:NZ)    !Stress Tensor
       Dimension PScT00(NX0:NX, NY0:NY, NZ0:NZ)
@@ -206,7 +204,6 @@ CSHEN=========end==========================================================
 
 
       Accu=3.0                  ! 3pt formula for derivative
-C      Accu=5.0                  ! 5pt formula for derivative
 
 
 !------------- Freezeout energy density and temperature -----------------
@@ -349,25 +346,8 @@ C====Input the initial condition from file====
      &  NX0,NY0,NZ0, NX,NY,NZ, Time, NXPhy0,NYPhy0, NXPhy,NYPhy,
      &  VRelaxT,VRelaxT0)
 
-      End If
-
-CPLUMBERG===================================================
-      If (INITIALIZE_PI_TO_ZERO) Then
-
-        Print*, 'Initializing pi(mu,nu) = 0'
-        Pi00 = 0D0
-        Pi01 = 0D0
-        Pi02 = 0D0
-        Pi33 = 0D0
-        Pi11 = 0D0
-        Pi12 = 0D0
-        Pi22 = 0D0
-
-      Else
-        Print*, 'Not initializing pi(mu,nu) = 0'
 
       End If
-CPLUMBERG===================================================
 
 !CHANGES
 !   ---Zhi-Changes---
@@ -403,7 +383,7 @@ CPLUMBERG===================================================
 
 2570  continue
 
-       call dpSc8(TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,GTh,
+       call dpSc8(TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,
      &  Pi00,Pi01,Pi02,Pi33,Pi11,Pi12,Pi22, PScT00,PScT01,PScT02,PScT33,
      &  PScT11,PScT12,PScT22,etaTtp0,etaTtp,  PPI,PISc, XiTtP0,XiTtP,
      &  U0,U1,U2, PU0,PU1,PU2,SxyT, Stotal,StotalBv,StotalSv,

@@ -159,7 +159,7 @@ CSHEN======parameters declearation end==========================================
        OPi22 = Pi22(I,J,K)*HbarC
        OPi33 = Pi33(I,J,K)*HbarC
        OPPi  = PPi(I,J,K)*HbarC
-       if(IVisflag.ne.0) then
+       if(IVisflag.eq.1) then
          OEtas = ViscousCTemp(Temp(I,J,K))
        else
          OEtas = ViscousC

@@ -74,7 +74,7 @@
       debug = 0
       outPiTrace = 1
       outPiStrengthX = 0
-      outPiComponents = 1
+      outPiComponents = 0
       outEOnXY = 0
       outPiLastTime = 0.0
       outPiMovieDt = 0.0

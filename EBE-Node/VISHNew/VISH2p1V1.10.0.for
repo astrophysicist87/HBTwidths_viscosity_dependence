@@ -70,7 +70,7 @@ C===============================================================================
 
 CSHEN===========================================================================
        Logical :: IOSCAR=.false.            ! trigger for output OSCAR format hydro results, False: not output, True: output
-       Integer :: IVisflag=0          ! Flag for temperature dependent eta/s, 0: constant, 1: temperature dependent, which is defined in function ViscousCTemp(T)
+       Integer :: IVisflag=1          ! Flag for temperature dependent eta/s, 0: constant, 1: temperature dependent, which is defined in function ViscousCTemp(T)
        Integer :: IOSCARWrite       ! output OCCAR file path number
 CSHEN===========================================================================
 
@@ -234,6 +234,7 @@ C------ Chris Plumberg added this line -----------------------
      &    "NDX=", NDX, "NDY=", NDY, "NDT=", NDT
 
 
+
       ddx=dx
       ddy=dy
       DZ=0.01d0
@@ -269,8 +270,7 @@ C======output the chemical potential information at freeze out surface.====
       open(83,FILE='results/SurfaceY.dat',FORM='FORMATTED',
      &     STATUS='REPLACE')         !output the freeze-out surface along y-axis
       open(91,File='results/Temp.dat',status='REPLACE')
-      open(93,File='results/Temp_evoX.dat',status='REPLACE')
-      open(94,File='results/Temp_evoY.dat',status='REPLACE')
+      open(93,File='results/Temp_evo.dat',status='REPLACE')
       open(90,File='results/APi.dat',status='REPLACE')
       open(89,File='results/AScource.dat',status='REPLACE')
       open(88,File='results/AScource2.dat',status='REPLACE')
@@ -338,7 +338,6 @@ CSHEN======output OSCAR file Header end=====================================
       Close(98)
       Close(99)
       Close(93)
-      Close(94)
       Close(81)
       Close(82)
       Close(83)
@@ -457,11 +456,6 @@ C======output relaxation time for both shear and bulk viscosity================
 CSHEN==========================================================================
 
 
-CPLUMBERG==========================================================================
-C=================output local expansion rate theta(x)=============================
-      Dimension GlobalTheta(NX0:NX, NY0:NY, NZ0:NZ)
-CPLUMBERG==========================================================================
-
 
 C----------------------------------------------------------------------------------------------
       DIMENSION EPS0(NX0:NX,NY0:NY),EPS1(NX0:NX,NY0:NY) ! Energy density in previous and current step
@@ -576,7 +570,7 @@ CSHEN===EOS from tables end====================================================
 !============ Initialization ===========================================
       Call InitializeAll(NX0,NY0,NZ0,NX,NY,NZ,
      &  NXPhy0,NYPhy0,NXPhy,NYPhy,T0,DX,DY,DZ,DT,MaxT,NDX,NDY,NDT,
-     &  TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,GlobalTheta,
+     &  TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,
      &  Pi00,Pi01,Pi02,Pi33,Pi11,Pi12,Pi22,
      &  PScT00,PScT01,PScT02,PScT33,
      &  PScT11,PScT12,PScT22,etaTtp0,etaTtp,PPI,PISc,XiTtP0,XiTtP,
@@ -1041,7 +1035,7 @@ CSHEN====END====================================================================
           PPI = 0D0
         endif
 
-      call dpSc8(TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,GlobalTheta,
+      call dpSc8(TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,
      &  Pi00,Pi01,Pi02,Pi33,Pi11,Pi12,Pi22, PScT00,PScT01,PScT02,PScT33,
      &  PScT11,PScT12,PScT22,etaTtp0,etaTtp,  PPI,PISc, XiTtP0,XiTtP,
      &  U0,U1,U2, PU0,PU1,PU2,SxyT,Stotal,StotalBv,StotalSv,
@@ -1159,7 +1153,7 @@ CSHEN====END====================================================================
         Pi33 = 0D0
         PPI = 0D0
 
-      call dpSc8(TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,GlobalTheta,
+      call dpSc8(TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,
      &  Pi00,Pi01,Pi02,Pi33,Pi11,Pi12,Pi22, PScT00,PScT01,PScT02,PScT33,
      &  PScT11,PScT12,PScT22,etaTtp0,etaTtp,  PPI,PISc, XiTtP0,XiTtP,
      &  U0,U1,U2, PU0,PU1,PU2,SxyT,Stotal,StotalBv,StotalSv,
@@ -1218,35 +1212,15 @@ C====output the OSCAR body file from hydro evolution============ ===============
       endif
 CSHEN===end=====================================================================
 
+
       Hc = HbarC
 
       Do J=0,NXPhy,NXPhy+1
-      Do I=NYPhy0,NYPhy,1
-C	LocalTemp=Temp(I,J,NZ0)
-        ViscousC = ViscousCTemp(Temp(I,J,NZ0))
-        ExpRate = GlobalTheta(I,J,NZ0)
-        DKn=ExpRate*ViscousC/Temp(I,J,NZ0)
-C       if(1) then
-C        Print*, 'theta=',ExpRate,ViscousC,Temp(I,J,NZ0)
-C        Print*, 'Kn(exp)=',ExpRate*ViscousC/(Temp(I,J,NZ0)*HBarC)
-C        Print*, 'Kn(calc)=',DKn
-C       endif
+      Do I=NYPhy0,NYPhy,10
         write(93, '(5e15.5)')Time, I*DX, J*DY, Temp(I,J,NZ0)*HBarC,
-     &                       DKn
-C     &                       Ed(I,J,NZ0)*Hc, DKn
+     &                       Ed(I,J,NZ0)*Hc
       enddo
       enddo
-
-CPLUMBERG===begin===================================================================
-      Do J=NXPhy0,NXPhy,1
-      Do I=0,NYPhy,NYPhy+1
-        ViscousC = ViscousCTemp(Temp(I,J,NZ0))
-        ExpRate = GlobalTheta(I,J,NZ0)
-        DKn=ExpRate*ViscousC/Temp(I,J,NZ0)
-        write(94, '(5e15.5)')Time, I*DX, J*DY, Temp(I,J,NZ0)*HBarC, DKn
-      enddo
-      enddo
-CPLUMBERG===end=====================================================================
 
       DO 203 I=0,NXPhy,20
          Write(*,'(500e12.3)')(Temp(I,J,NZ0)*Hc,J=0,NYPhy,20 )
@@ -1372,7 +1346,6 @@ CSHEN===End=====================================================================
 
       Return
       End
-C=====END OF MAINPRO HERE
 
 C##################################################################################
       Subroutine FreezeoutPro9 (EDEC,TFREEZ, TFLAG,IEOS, NDX,NDY,NDT,
@@ -2441,7 +2414,6 @@ C#####################################################
 CSHEN==========================================================================
 C=======for temperature dependent \eta/s=======================================
       if(IVisflag.ne.0) then
-C        Print *, "Made it to ViscousCTemp loop!"
         ViscousC = ViscousCTemp(Temp(i,j,k))      !CSHEN: for temperatrure dependent \eta/s
       endif
 CSHEN======end=================================================================
@@ -3279,7 +3251,7 @@ C###################################################################
 C~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 C###################################################################
-      Subroutine dpSc8(TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,GTh,
+      Subroutine dpSc8(TT00,TT01,TT02,ScT00,ScT01,ScT02,Vx,Vy,
      &  Pi00,Pi01,Pi02,Pi33,Pi11,Pi12,Pi22, PScT00,PScT01,PScT02,PScT33,
      &  PScT11,PScT12,PScT22,etaTtp0,etaTtp,  PPI,PISc, XiTtP0,XiTtP,
      &  U0,U1,U2, PU0,PU1,PU2,SxyT,Stotal,StotalBv,StotalSv,
@@ -3344,7 +3316,6 @@ C-------------------------------------------
         Dimension Temp0(NX0:NX, NY0:NY, NZ0:NZ) !Local Temperature  in last time step
         Dimension Temp(NX0:NX, NY0:NY, NZ0:NZ) !Local Temperature
         Dimension CMu(NX0:NX, NY0:NY, NZ0:NZ) !Local chemical potential
-        Dimension GTh(NX0:NX, NY0:NY, NZ0:NZ) !Local Expansion Rate \theta
 
         Dimension VCoefi(NX0:NX, NY0:NY, NZ0:NZ) !viscous coeficient
         Dimension VCBeta(NX0:NX, NY0:NY, NZ0:NZ) !viscous coeficient  Beta 2
@@ -3807,7 +3778,6 @@ C-------------------------------------------------------------------------------
         ff=1.0/(Dexp((rr-R0Bdry)/Aeps)+1.0)
 
       Accu=3.0
-C      Accu=5.0
        If(abs(Accu-3.0).le.0.00001) then  !3pt formula
           PA=(Vx(I+1,J,K)-Vx(I-1,J,K))/(2*DX)
      &      +(Vy(I,J+1,K)-Vy(I,J-1,K))/(2*DY)
@@ -3901,12 +3871,6 @@ C      Accu=5.0
         Stop
       EndIf
       EndIf
-
-C      If (1) Then
-C        Print *, "SiLoc=", SiLoc(I,J,K)
-C
-C      EndIf
-
 
           PISc(i,j,K)=0.0 +( PPI(I,J,K)*BAdd+
      &       PA*PPI(I,J,K)-PT0*(PPI(I,J,K)+PS0*SiLoc(i,j,K)))*(-1.0)
@@ -4243,20 +4207,6 @@ C            Print *, 'time',time,'Stotal', Stotal,StotalSv,StotalBv
      &  NXPhy0,NYPhy0, NXPhy,NYPhy, NX0,NX,NY0,NY,NZ0,NZ)  !PNEW NNEW something related to root finding
 
 
-CPLUMBERG===========================================================
-      DO inI=NYPhy0,NYPhy,10
-      DO inJ=0,NXPhy,NXPhy+1
-C	Print*, 'Successfully entered my loop!'
-        GTh(inI,inJ,NZ0) = SiLoc(inI,inJ,NZ0)
-C	Print*, 'SiLoc =', SiLoc(inI,inJ,NZ0)
-C	Print*, 'Gth =', GTh(inI,inJ,NZ0)
-C        if(SiLoc(inI,inJ,NZ0) > 1.e-3) then
-C          Print*, 'Local Expansion Rate',  SiLoc(inI,inJ,NZ0)
-C        endif
-      enddo
-      enddo
-CPLUMBERG===========================================================
-
 
       AMV=Hbarc*1000.0 !fm-1 change to MEV
       GV=Hbarc !fm-1 change to GEV
@@ -4280,7 +4230,7 @@ CPLUMBERG===========================================================
      &  -difPixy*GV, -APL*GV, -APLdx*GV, -APLdy*GV,
      &   AP11dx*GV, AP22dy*GV
 
-C	end of dpsc8 subroutine
+
 !     Checking codes deleted
 !     See previous versions
 !     Search "goto 888"

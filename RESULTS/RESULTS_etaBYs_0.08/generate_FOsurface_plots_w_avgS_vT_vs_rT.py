@@ -193,7 +193,7 @@ def generate_avgFOsurface_plots2():
 	
 	for TVidx in xrange(1,3):
 		# load data
-		direc = '/home/plumberg.1/HBTwidths_viscosity_dependence/RESULTS/RESULTS_etaBYs_%(ebs)0.2f/NEW_TDEP_V%(TV)d/NEW_TDEP_V%(TV)d_results-avg-1' % {"ebs": ebs, "TV": TVidx}
+		direc = '/home/plumberg.1/HBTwidths_viscosity_dependence/RESULTS/RESULTS_etaBYs_%(ebs)0.2f/NEW_TDEP_V%(TV)d/NEW_TDEP_V%(TV)d_results-avg-1' % {"ebs": ebs, "TV": TVidx+2}
 		fileToProcess = direc + '/averaged_S_on_FOsurface_ev1.dat'
 		data = loadtxt(fileToProcess)
 		pT = data[:,0]
@@ -212,7 +212,7 @@ def generate_avgFOsurface_plots2():
 			# plot results
 			im = axs[KTidx, TVidx-1].scatter(rT, tau, s=10.0, c=((avgS-min(avgS))/(max(avgS)-min(avgS))), alpha=0.5, edgecolor='')
 			axs[KTidx, TVidx-1].axis([rTlower, rTupper, taulower, tauupper])
-			axs[KTidx, TVidx-1].text(0.1, 0.9,'%(ebsP)s, $K_T = $%(KTval)0.1f GeV' % {"ebsP": etaBYsParams[TVidx-1], "KTval": localpT}, transform=axs[KTidx, TVidx-1].transAxes, fontsize=plotfontsize - 5)
+			axs[KTidx, TVidx-1].text(0.1, 0.9,'%(ebsP)s, $K_T = $%(KTval)0.1f GeV' % {"ebsP": etaBYsParams[TVidx-1+2], "KTval": localpT}, transform=axs[KTidx, TVidx-1].transAxes, fontsize=plotfontsize - 5)
 			if TVidx==1:
 				axs[KTidx, TVidx-1].set_ylabel(r'$\tau$ (fm/$c$)', {'fontsize': plotfontsize + 5, 'rotation': 90})
 			if KTidx==2:
@@ -236,14 +236,14 @@ def generate_avgFOsurface_plots2():
 
 
 if __name__ == "__main__":
-	#for KT in linspace(0,2,5):	# i.e., for KT = 0.0, 0.5, 1.0, 1.5, and 2.0 GeV
-	#	for TVidx in range(5)[1:]:
-	#		generate_FOsurface_plots(759, KT, TVidx)
+	for KT in linspace(0,2,5):	# i.e., for KT = 0.0, 0.5, 1.0, 1.5, and 2.0 GeV
+		for TVidx in range(5)[1:]:
+			generate_FOsurface_plots(759, KT, TVidx)
 			#try:
 			#	input("Press [enter] to continue...")
 			#except SyntaxError:
 			#	pass
-	generate_avgFOsurface_plots2()
+	#generate_avgFOsurface_plots2()
 
 
 

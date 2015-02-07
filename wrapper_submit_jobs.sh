@@ -11,7 +11,7 @@ do
 	bvar1=$i
 	bvar2=$[i+$njobs-1]
 	echo 'Run jobs from' $bvar1 'to' $bvar2 'at' `date` >> $outfile
-	#bash submit_jobs.sh $bvar1 $bvar2
+	bash submit_jobs.sh $bvar1 $bvar2
 	#bash submit_get_anisotropic_flows_jobs.sh $bvar1 $bvar2
-	bash submit_process_event_jobs.sh $bvar1 $bvar2
+	#bash submit_process_event_jobs.sh $bvar1 $bvar2
 done

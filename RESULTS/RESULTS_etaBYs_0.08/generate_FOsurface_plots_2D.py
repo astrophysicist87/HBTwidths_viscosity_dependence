@@ -88,8 +88,8 @@ def generate_avgFOsurface_plots():
 
 
 if __name__ == "__main__":
-	#generate_FOsurface_plots(759)
-	generate_avgFOsurface_plots()
+	generate_FOsurface_plots(759)
+	#generate_avgFOsurface_plots()
 
 
 

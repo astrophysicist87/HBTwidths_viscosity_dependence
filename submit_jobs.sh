@@ -13,8 +13,10 @@ do
 	cp -r EBE-Node PlayGround/copy`echo $idx`
 	#bash background_driver.sh $idx PlayGround/copy`echo $idx` &
         #bash background_driver_alternate.sh $idx PlayGround/copy`echo $idx` &
-	bash background_driver_etaBYs_of_T.sh $idx PlayGround/copy`echo $idx` &
-	#bash background_driver_etaBYs_of_T_AVG.sh $idx PlayGround/copy`echo $idx` &
+        #bash background_driver_AVG.sh PlayGround/copy`echo $idx` &
+	#bash background_driver_etaBYs_of_T.sh $idx PlayGround/copy`echo $idx` &
+	#CORRECT WAY: bash background_driver_etaBYs_of_T_AVG.sh $idx PlayGround/copy`echo $idx` &
+	bash background_driver_etaBYs_of_T_AVG.sh 1 PlayGround/copy`echo $idx` $idx &
 done
 
 wait
