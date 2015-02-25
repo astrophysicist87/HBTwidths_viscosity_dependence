@@ -70,7 +70,7 @@ C===============================================================================
 
 CSHEN===========================================================================
        Logical :: IOSCAR=.false.            ! trigger for output OSCAR format hydro results, False: not output, True: output
-       Integer :: IVisflag=1          ! Flag for temperature dependent eta/s, 0: constant, 1: temperature dependent, which is defined in function ViscousCTemp(T)
+       Integer :: IVisflag=0          ! Flag for temperature dependent eta/s, 0: constant, 1: temperature dependent, which is defined in function ViscousCTemp(T)
        Integer :: IOSCARWrite       ! output OCCAR file path number
 CSHEN===========================================================================
 
@@ -232,7 +232,6 @@ C------ Chris Plumberg added this line -----------------------
      &    "LS=", LS, "R0Bdry", R0Bdry, "VisBeta=", VisBeta,
      &    "DX=", DX, "DY=", DY, "DT_1=", DT_1,
      &    "NDX=", NDX, "NDY=", NDY, "NDT=", NDT
-
 
 
       ddx=dx

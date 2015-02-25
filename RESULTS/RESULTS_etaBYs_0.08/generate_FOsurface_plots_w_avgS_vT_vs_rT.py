@@ -166,7 +166,7 @@ def generate_avgFOsurface_plots():
 	outfile = 'out.pdf'
 	#plt.savefig(outfile, format='pdf')
 	#print 'Generated and saved', outfile
-	fig.colorbar()
+	#fig.colorbar()
 	fig.show()
 	try:
 		input("Press [enter] to continue...")
@@ -236,14 +236,14 @@ def generate_avgFOsurface_plots2():
 
 
 if __name__ == "__main__":
-	for KT in linspace(0,2,5):	# i.e., for KT = 0.0, 0.5, 1.0, 1.5, and 2.0 GeV
-		for TVidx in range(5)[1:]:
-			generate_FOsurface_plots(759, KT, TVidx)
+	#for KT in linspace(0,2,5):	# i.e., for KT = 0.0, 0.5, 1.0, 1.5, and 2.0 GeV
+	#	for TVidx in range(5)[1:]:
+	#		generate_FOsurface_plots(759, KT, TVidx)
 			#try:
 			#	input("Press [enter] to continue...")
 			#except SyntaxError:
 			#	pass
-	#generate_avgFOsurface_plots2()
+	generate_avgFOsurface_plots2()
 
 
 

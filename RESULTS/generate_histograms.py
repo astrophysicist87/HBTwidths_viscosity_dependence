@@ -5,7 +5,11 @@ import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
-ebsvals = ['0.00', '0.05', '0.08', '0.10', '0.15', '0.20']
+ebsvals = ['0.08']
+TVs = ['1']
+
+dfstem=''
+#dfstem='_no_df'
 
 def plot_EbE_R2o(ebs):
 	numplots = 6
@@ -13,14 +17,15 @@ def plot_EbE_R2o(ebs):
 	ax=plt.axes([0.1,0.15,0.85,0.8])
 	plt.axhline(0.0, color='black', linewidth=1.5)
 	
-	direc = 'RESULTS_etaBYs_%(ebsstring)s/' % {"ebsstring": ebs}
+	#direc = 'RESULTS_etaBYs_%(ebsstring)s/' % {"ebsstring": ebs}
+	direc = 'RESULTS_etaBYs_%(ebsstring)s/NEW_TDEP_V%(TV)s/' % {"ebsstring": ebs, "TV": TVs[0]}
 	
-	R2oKT00n = loadtxt(direc + 'R2o0_kt_0.0_1000evs.input.normed')
-	R2oKT02n = loadtxt(direc + 'R2o0_kt_0.2_1000evs.input.normed')
-	R2oKT04n = loadtxt(direc + 'R2o0_kt_0.4_1000evs.input.normed')
-	R2oKT06n = loadtxt(direc + 'R2o0_kt_0.6_1000evs.input.normed')
-	R2oKT08n = loadtxt(direc + 'R2o0_kt_0.8_1000evs.input.normed')
-	R2oKT10n = loadtxt(direc + 'R2o0_kt_1.0_1000evs.input.normed')
+	R2oKT00n = loadtxt(direc + 'R2o0_kt_0.0_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2oKT02n = loadtxt(direc + 'R2o0_kt_0.2_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2oKT04n = loadtxt(direc + 'R2o0_kt_0.4_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2oKT06n = loadtxt(direc + 'R2o0_kt_0.6_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2oKT08n = loadtxt(direc + 'R2o0_kt_0.8_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2oKT10n = loadtxt(direc + 'R2o0_kt_1.0_1000evs%(df)s.input.normed' % {"df": dfstem})
 
 	minKT00n, maxKT00n = min(R2oKT00n), max(R2oKT00n)
 	minKT02n, maxKT02n = min(R2oKT02n), max(R2oKT02n)
@@ -50,12 +55,12 @@ def plot_EbE_R2o(ebs):
 	nKT08n, binsKT08n, patchesKT08n = plt.hist(R2oKT08n, plotbins, histtype='step', normed=1)
 	nKT10n, binsKT10n, patchesKT10n = plt.hist(R2oKT10n, plotbins, histtype='step', normed=1)
 
-	plt.plot(delete(binsKT00n,-1) + 0.5*dKT, nKT00n, '-o', label='$K_T = 0.0$ GeV')
-	plt.plot(delete(binsKT02n,-1) + 0.5*dKT, nKT02n, '-o', label='$K_T = 0.2$ GeV')
-	plt.plot(delete(binsKT04n,-1) + 0.5*dKT, nKT04n, '-o', label='$K_T = 0.4$ GeV')
-	plt.plot(delete(binsKT06n,-1) + 0.5*dKT, nKT06n, '-o', label='$K_T = 0.6$ GeV')
-	plt.plot(delete(binsKT08n,-1) + 0.5*dKT, nKT08n, '-o', label='$K_T = 0.8$ GeV')
-	plt.plot(delete(binsKT10n,-1) + 0.5*dKT, nKT10n, '-o', label='$K_T = 1.0$ GeV')
+	plt.plot(delete(binsKT00n,-1) + 0.5*dKT, nKT00n, '-o', label='$K_T = 0.0$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT02n,-1) + 0.5*dKT, nKT02n, '-o', label='$K_T = 0.2$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT04n,-1) + 0.5*dKT, nKT04n, '-o', label='$K_T = 0.4$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT06n,-1) + 0.5*dKT, nKT06n, '-o', label='$K_T = 0.6$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT08n,-1) + 0.5*dKT, nKT08n, '-o', label='$K_T = 0.8$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT10n,-1) + 0.5*dKT, nKT10n, '-o', label='$K_T = 1.0$ GeV' % {"df": dfstem})
 
 	#adds some nice bars in the background of the histogram to give plot some structure
 	dummy1, dummy2, dummy3 = plt.hist(R2oKT00n, plotbins, histtype='bar', normed=1, edgecolor='black', color='white', alpha=0.5)
@@ -78,8 +83,8 @@ def plot_EbE_R2o(ebs):
 
 	plt.show()
 
-	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2o_vs_KT_1000evs.pdf', format='pdf')
-	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2o_vs_KT_1000evs.eps', format='eps')
+	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2o_vs_KT_1000evs%(df)s.pdf', format='pdf')
+	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2o_vs_KT_1000evs%(df)s.eps', format='eps')
 
 	plt.close()
 
@@ -90,14 +95,15 @@ def plot_EbE_R2s(ebs):
 	ax=plt.axes([0.1,0.15,0.85,0.8])
 	plt.axhline(0.0, color='black', linewidth=1.5)
 	
-	direc = 'RESULTS_etaBYs_%(ebsstring)s/' % {"ebsstring": ebs}
+	#direc = 'RESULTS_etaBYs_%(ebsstring)s/' % {"ebsstring": ebs}
+	direc = 'RESULTS_etaBYs_%(ebsstring)s/NEW_TDEP_V%(TV)s/' % {"ebsstring": ebs, "TV": TVs[0]}
 
-	R2sKT00n = loadtxt(direc + 'R2s0_kt_0.0_1000evs.input.normed')
-	R2sKT02n = loadtxt(direc + 'R2s0_kt_0.2_1000evs.input.normed')
-	R2sKT04n = loadtxt(direc + 'R2s0_kt_0.4_1000evs.input.normed')
-	R2sKT06n = loadtxt(direc + 'R2s0_kt_0.6_1000evs.input.normed')
-	R2sKT08n = loadtxt(direc + 'R2s0_kt_0.8_1000evs.input.normed')
-	R2sKT10n = loadtxt(direc + 'R2s0_kt_1.0_1000evs.input.normed')
+	R2sKT00n = loadtxt(direc + 'R2s0_kt_0.0_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2sKT02n = loadtxt(direc + 'R2s0_kt_0.2_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2sKT04n = loadtxt(direc + 'R2s0_kt_0.4_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2sKT06n = loadtxt(direc + 'R2s0_kt_0.6_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2sKT08n = loadtxt(direc + 'R2s0_kt_0.8_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2sKT10n = loadtxt(direc + 'R2s0_kt_1.0_1000evs%(df)s.input.normed' % {"df": dfstem})
 
 	minKT00n, maxKT00n = min(R2sKT00n), max(R2sKT00n)
 	minKT02n, maxKT02n = min(R2sKT02n), max(R2sKT02n)
@@ -125,12 +131,12 @@ def plot_EbE_R2s(ebs):
 	nKT08n, binsKT08n, patchesKT08n = plt.hist(R2sKT08n, plotbins, histtype='step', normed=1)
 	nKT10n, binsKT10n, patchesKT10n = plt.hist(R2sKT10n, plotbins, histtype='step', normed=1)
 
-	plt.plot(delete(binsKT00n,-1) + 0.5*dKT, nKT00n, '-o', label='$K_T = 0.0$ GeV')
-	plt.plot(delete(binsKT02n,-1) + 0.5*dKT, nKT02n, '-o', label='$K_T = 0.2$ GeV')
-	plt.plot(delete(binsKT04n,-1) + 0.5*dKT, nKT04n, '-o', label='$K_T = 0.4$ GeV')
-	plt.plot(delete(binsKT06n,-1) + 0.5*dKT, nKT06n, '-o', label='$K_T = 0.6$ GeV')
-	plt.plot(delete(binsKT08n,-1) + 0.5*dKT, nKT08n, '-o', label='$K_T = 0.8$ GeV')
-	plt.plot(delete(binsKT10n,-1) + 0.5*dKT, nKT10n, '-o', label='$K_T = 1.0$ GeV')
+	plt.plot(delete(binsKT00n,-1) + 0.5*dKT, nKT00n, '-o', label='$K_T = 0.0$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT02n,-1) + 0.5*dKT, nKT02n, '-o', label='$K_T = 0.2$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT04n,-1) + 0.5*dKT, nKT04n, '-o', label='$K_T = 0.4$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT06n,-1) + 0.5*dKT, nKT06n, '-o', label='$K_T = 0.6$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT08n,-1) + 0.5*dKT, nKT08n, '-o', label='$K_T = 0.8$ GeV' % {"df": dfstem})
+	plt.plot(delete(binsKT10n,-1) + 0.5*dKT, nKT10n, '-o', label='$K_T = 1.0$ GeV' % {"df": dfstem})
 
 	#adds some nice bars in the background of the histogram to give plot some structure
 	dummy1, dummy2, dummy3 = plt.hist(R2sKT00n, plotbins, histtype='bar', normed=1, edgecolor='black', color='white', alpha=0.5)
@@ -154,8 +160,8 @@ def plot_EbE_R2s(ebs):
 
 	plt.show()
 
-	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2s_vs_KT_1000evs.pdf', format='pdf')
-	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2s_vs_KT_1000evs.eps', format='eps')
+	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2s_vs_KT_1000evs%(df)s.pdf', format='pdf')
+	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2s_vs_KT_1000evs%(df)s.eps', format='eps')
 
 	plt.close()
 
@@ -168,14 +174,15 @@ def plot_EbE_R2l(ebs):
 	ax=plt.axes([0.1,0.15,0.85,0.8])
 	plt.axhline(0.0, color='black', linewidth=1.5)
 	
-	direc = 'RESULTS_etaBYs_%(ebsstring)s/' % {"ebsstring": ebs}
+	#direc = 'RESULTS_etaBYs_%(ebsstring)s/' % {"ebsstring": ebs}
+	direc = 'RESULTS_etaBYs_%(ebsstring)s/NEW_TDEP_V%(TV)s/' % {"ebsstring": ebs, "TV": TVs[0]}
 
-	R2lKT00n = loadtxt(direc + 'R2l0_kt_0.0_1000evs.input.normed')
-	R2lKT02n = loadtxt(direc + 'R2l0_kt_0.2_1000evs.input.normed')
-	R2lKT04n = loadtxt(direc + 'R2l0_kt_0.4_1000evs.input.normed')
-	R2lKT06n = loadtxt(direc + 'R2l0_kt_0.6_1000evs.input.normed')
-	R2lKT08n = loadtxt(direc + 'R2l0_kt_0.8_1000evs.input.normed')
-	R2lKT10n = loadtxt(direc + 'R2l0_kt_1.0_1000evs.input.normed')
+	R2lKT00n = loadtxt(direc + 'R2l0_kt_0.0_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2lKT02n = loadtxt(direc + 'R2l0_kt_0.2_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2lKT04n = loadtxt(direc + 'R2l0_kt_0.4_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2lKT06n = loadtxt(direc + 'R2l0_kt_0.6_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2lKT08n = loadtxt(direc + 'R2l0_kt_0.8_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2lKT10n = loadtxt(direc + 'R2l0_kt_1.0_1000evs%(df)s.input.normed' % {"df": dfstem})
 
 	minKT00n, maxKT00n = min(R2lKT00n), max(R2lKT00n)
 	minKT02n, maxKT02n = min(R2lKT02n), max(R2lKT02n)
@@ -233,8 +240,8 @@ def plot_EbE_R2l(ebs):
 
 	plt.show()
 
-	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2l_vs_KT_1000evs.pdf', format='pdf')
-	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2l_vs_KT_1000evs.eps', format='eps')
+	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2l_vs_KT_1000evs%(df)s.pdf', format='pdf')
+	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2l_vs_KT_1000evs%(df)s.eps', format='eps')
 
 	plt.close()
 
@@ -245,14 +252,15 @@ def plot_EbE_R2ol(ebs):
 	ax=plt.axes([0.1,0.15,0.85,0.8])
 	plt.axhline(0.0, color='black', linewidth=1.5)
 	
-	direc = 'RESULTS_etaBYs_%(ebsstring)s/' % {"ebsstring": ebs}
+	#direc = 'RESULTS_etaBYs_%(ebsstring)s/' % {"ebsstring": ebs}
+	direc = 'RESULTS_etaBYs_%(ebsstring)s/NEW_TDEP_V%(TV)s/' % {"ebsstring": ebs, "TV": TVs[0]}
 
 	#R2olKT00n = loadtxt(direc + 'R2ol0_kt_0.0_1000evs.input.normed')
-	R2olKT02n = loadtxt(direc + 'R2ol0_kt_0.2_1000evs.input.normed')
-	R2olKT04n = loadtxt(direc + 'R2ol0_kt_0.4_1000evs.input.normed')
-	R2olKT06n = loadtxt(direc + 'R2ol0_kt_0.6_1000evs.input.normed')
-	R2olKT08n = loadtxt(direc + 'R2ol0_kt_0.8_1000evs.input.normed')
-	R2olKT10n = loadtxt(direc + 'R2ol0_kt_1.0_1000evs.input.normed')
+	R2olKT02n = loadtxt(direc + 'R2ol0_kt_0.2_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2olKT04n = loadtxt(direc + 'R2ol0_kt_0.4_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2olKT06n = loadtxt(direc + 'R2ol0_kt_0.6_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2olKT08n = loadtxt(direc + 'R2ol0_kt_0.8_1000evs%(df)s.input.normed' % {"df": dfstem})
+	R2olKT10n = loadtxt(direc + 'R2ol0_kt_1.0_1000evs%(df)s.input.normed' % {"df": dfstem})
 
 	#minKT00n, maxKT00n = min(R2olKT00n), max(R2olKT00n)
 	minKT02n, maxKT02n = min(R2olKT02n), max(R2olKT02n)
@@ -310,8 +318,8 @@ def plot_EbE_R2ol(ebs):
 
 	plt.show()
 
-	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2ol_vs_KT_1000evs.pdf', format='pdf')
-	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2ol_vs_KT_1000evs.eps', format='eps')
+	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2ol_vs_KT_1000evs%(df)s.pdf', format='pdf')
+	#plt.savefig('/home/plumberg.1/EBE-results/database/EbE_R2ol_vs_KT_1000evs%(df)s.eps', format='eps')
 
 	plt.close()
 
@@ -319,8 +327,8 @@ def plot_EbE_R2ol(ebs):
 
 if __name__ == "__main__":
 	for etaBYs in ebsvals:
-		plot_EbE_R2o(etaBYs)
 		plot_EbE_R2s(etaBYs)
+		plot_EbE_R2o(etaBYs)
 		plot_EbE_R2l(etaBYs)
 		plot_EbE_R2ol(etaBYs)
 

@@ -12,7 +12,7 @@ cp $ICsfolder`echo $1`/sd_event_*_block.dat $hydrofolder/Initial/InitialSd.dat
 outfile=results-`echo $1`-OSCAR_hydro_processing.out
 echo 'Started running at' `date` >> $outfile
 
-for etaBYsval in 0.00 0.05 0.08 0.10 0.15 0.20
+for etaBYsval in 0.00 0.05 0.10 0.15 0.20
 do
 	echo 'Working on eta/s =' $etaBYsval'...' >> $outfile
 	#run hydro

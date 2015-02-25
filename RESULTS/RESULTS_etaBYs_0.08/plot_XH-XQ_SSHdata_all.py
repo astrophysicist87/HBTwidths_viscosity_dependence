@@ -4,6 +4,11 @@ from pylab import *
 import matplotlib.pyplot as plt
 import mpl_toolkits.axes_grid.inset_locator as inloc
 
+df_stem = ''
+#df_stem = '_no_df'
+#neq_stem = ''
+neq_stem = '_neq0'
+
 def relf(a,b):
 	return 100.*(a-b)/b
 
@@ -21,16 +26,21 @@ def generate_all_plots():
 	# CORRECT: HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
 	# CORRECT: HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
 
-	idealdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	#idealdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
 	#idealdata2=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy1/VISHNew/results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	LHLQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy1/VISHNew/TV1_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	LHHQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy2/VISHNew/TV2_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	HHLQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy3/VISHNew/TV3_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	HHHQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy4/VISHNew/TV4_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	#LHLQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy1/VISHNew/TV1_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	#LHHQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy2/VISHNew/TV2_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	#HHLQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy3/VISHNew/TV3_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	#HHHQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy4/VISHNew/TV4_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	idealdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1_no_df.dat_cfs_0')[:,cols]
+	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_results-avg-1' + df_stem + '/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_results-avg-1' + df_stem + '/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_results-avg-1' + df_stem + '/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_results-avg-1' + df_stem + '/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = 3.0, 13.0
+	ylower, yupper = 2.5, 13.0
 	pclower, pcupper = -10.0, 100.0
 	
 	ax1 = fig.add_subplot(221)
@@ -65,7 +75,7 @@ def generate_all_plots():
 	
 	# R2o
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = 4.0, 32.5
+	ylower, yupper = 4.0, 33.5
 	pclower, pcupper = -25.0, 25.0
 	
 	ax2 = fig.add_subplot(222)
@@ -103,7 +113,7 @@ def generate_all_plots():
 	
 	# R2l
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -0.5, 75.0
+	ylower, yupper = -0.5, 79.0
 	pclower, pcupper = -40.0, 10.0
 	
 	ax3 = fig.add_subplot(223)
@@ -137,7 +147,7 @@ def generate_all_plots():
 	
 	# R2ol
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -0.5, 27.5
+	ylower, yupper = -0.5, 28.5
 	pclower, pcupper = -20.0, 5.0
 	
 	ax4 = fig.add_subplot(224)
@@ -174,9 +184,8 @@ def generate_all_plots():
 	ax4.legend(loc='center right')
 	# end of R2ol
 	
-	plt.show()
-	#plt.savefig('R2ijSSH_vs_TDEPVX_w_insets.pdf', format='pdf')
-	#plt.savefig('R2ijSSH_vs_TDEPVX.pdf', format='pdf')
+	#plt.show()
+	plt.savefig('R2ijSSH_vs_TDEPVX' + df_stem + '.pdf', format='pdf')
 
 
 

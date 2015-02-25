@@ -14,8 +14,10 @@ cp $ICsfolder`echo $1`/sd_event_*_block.dat $hydrofolder/Initial/InitialSd.dat
 outfilename="History/TDEPebs_results-`echo $1`_hydro_and_HBT_processing.out"
 outfile=`get_filename $outfilename`
 
-for CPvisflag in 1 2 3 4
-do
+CPvisflag=$3
+
+#for CPvisflag in 1 2 3 4
+#do
 	if [[ "$CPvisflag" == "1" ]]
 	then
 		fitfactor=1.027
@@ -37,18 +39,18 @@ do
 	./VISHNew.e IEOS=7 Edec=0.18 T0=0.6 vis=0.08 IINIT=2 iEin=1 iLS=130 factor=`echo $fitfactor` IVisflagINPUT=`echo $CPvisflag` >> $hydrofolder/results/RunRecord_results-`echo $1`_etaBYsTparm_`echo $CPvisflag`.txt
 	cd $basedirectory)
 	echo 'Finished hydro for eta/s(T), parametrization #' $CPvisflag 'and results-'$1'.' >> $outfile
-	cp $ICsfolder`echo $1`/sd_event_*_block.dat $hydrofolder/results/
-	dir1=$basedirectory/RESULTS/RESULTS_etaBYs_0.08/NEW_TDEP_V`echo $CPvisflag`
-	individualResultsDirectory=NEW_TDEP_V`echo $CPvisflag`_results
-	outputfolder=$dir1/$individualResultsDirectory-`echo $1`
+	#cp $ICsfolder`echo $1`/sd_event_*_block.dat $hydrofolder/results/
+	#dir1=$basedirectory/RESULTS/RESULTS_etaBYs_0.08/NEW_TDEP_V`echo $CPvisflag`
+	#individualResultsDirectory=NEW_TDEP_V`echo $CPvisflag`_results
+	#outputfolder=$dir1/$individualResultsDirectory-`echo $1`
 	# move output from hydro
-	mv $hydrofolder/results $outputfolder
-	echo 'Moved hydro results to' $outputfolder >> $outfile
-	echo '' >> $outfile
+	#mv $hydrofolder/results $outputfolder
+	#echo 'Moved hydro results to' $outputfolder >> $outfile
+	#echo '' >> $outfile
 	# do HBT and related calculations on hydro output
 	#echo 'Starting HBT calculations...' >> $outfile
 	#cp $HBTfolder/$HBTexecutable $outputfolder/$HBTexecutable
 	#$outputfolder/$HBTexecutable $dir1 $individualResultsDirectory $idx &
-done
+#done
 
-\rm -rf $basedirectory/$2
+#\rm -rf $basedirectory/$2
