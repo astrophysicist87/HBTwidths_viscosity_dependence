@@ -17,6 +17,7 @@ def generate_all_plots():
 	plotfontsize = 12
 	relativesubplotsize = 0.125
 	cols = [1,3,5,9,13]	# KT, R2s, R2o, R2l, R2ol
+	R2oscols = [1,8]	# KT, R2os (picks out column of sine coefficients)
 	fig = plt.figure()
 	fig.subplots_adjust(wspace=0.0, hspace=0.0)
 	
@@ -32,11 +33,18 @@ def generate_all_plots():
 	#LHHQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy2/VISHNew/TV2_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
 	#HHLQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy3/VISHNew/TV3_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
 	#HHHQdata=loadtxt('/home/plumberg.1/HBTwidths_viscosity_dependence/PlayGround/copy4/VISHNew/TV4_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	idealdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1_no_df.dat_cfs_0')[:,cols]
-	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_results-avg-1' + df_stem + '/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_results-avg-1' + df_stem + '/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_results-avg-1' + df_stem + '/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
-	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_results-avg-1' + df_stem + '/HBTradii_cfs_ev1.dat_cfs_0')[:,cols]
+	idealdata=loadtxt('../RESULTS_etaBYs_0.00/SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_0')[:,cols]
+	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols]
+	LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols]
+	HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols]
+	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols]
+
+	#R2os files
+	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_2')[:,R2oscols]
+	LHLQR2osdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
@@ -113,7 +121,7 @@ def generate_all_plots():
 	
 	# R2l
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -0.5, 79.0
+	ylower, yupper = -0.5, 159.0
 	pclower, pcupper = -40.0, 10.0
 	
 	ax3 = fig.add_subplot(223)
@@ -140,25 +148,32 @@ def generate_all_plots():
 	ax3.set_xticklabels(['0.0', '0.5', '1.0', '1.5'])
 	ax3.set_xlabel(r'$K_T$ (GeV)', {'fontsize': plotfontsize + 5})
 	ax3.set_ylabel(r'$\overline{R}^2_l$ (fm$^2\!$)', {'fontsize': plotfontsize + 5})
-	ax3.text(0.85, 0.85,'(c)', transform=ax3.transAxes, fontsize=plotfontsize + 5)
+	ax3.text(0.85, 0.1,'(c)', transform=ax3.transAxes, fontsize=plotfontsize + 5)
+	ax3.legend(loc='upper center')
 	
 	#ax3.legend(loc=1)
 	# end of R2l
 	
-	# R2ol
+	# R2os
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -0.5, 28.5
+	ylower, yupper = -0.01, 0.55
 	pclower, pcupper = -20.0, 5.0
 	
 	ax4 = fig.add_subplot(224)
 	#ax4inset = fig.add_axes([0.65, 0.25, relativesubplotsize, relativesubplotsize])
 	#ax4inset = inloc.inset_axes(ax4, width="40%", height="40%", loc=1)
 	
-	ax4.plot(LHLQdata[:,0], -LHLQdata[:,4], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
-	ax4.plot(LHHQdata[:,0], -LHHQdata[:,4], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
-	ax4.plot(HHLQdata[:,0], -HHLQdata[:,4], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
-	ax4.plot(HHHQdata[:,0], -HHHQdata[:,4], linestyle='--', color='green', linewidth=2, label='HH-HQ')
-	ax4.plot(idealdata[:,0], -idealdata[:,4], linestyle='solid', color='black', linewidth=1, label='ideal')	
+	#ax4.plot(LHLQdata[:,0], -LHLQdata[:,4], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
+	#ax4.plot(LHHQdata[:,0], -LHHQdata[:,4], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
+	#ax4.plot(HHLQdata[:,0], -HHLQdata[:,4], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
+	#ax4.plot(HHHQdata[:,0], -HHHQdata[:,4], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	#ax4.plot(idealdata[:,0], -idealdata[:,4], linestyle='solid', color='black', linewidth=1, label='ideal')	
+
+	ax4.plot(LHLQR2osdata[:,0], LHLQR2osdata[:,1], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
+	ax4.plot(LHHQR2osdata[:,0], LHHQR2osdata[:,1], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
+	ax4.plot(HHLQR2osdata[:,0], HHLQR2osdata[:,1], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
+	ax4.plot(HHHQR2osdata[:,0], HHHQR2osdata[:,1], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	ax4.plot(idealR2osdata[:,0], idealR2osdata[:,1], linestyle='solid', color='black', linewidth=1, label='ideal')	
 	
 	onezero=zeros(len(LHLQdata[:,0]))+1
 	onezero[0]=0.
@@ -175,13 +190,13 @@ def generate_all_plots():
 	#ax4inset.set_ylabel(r'', {'fontsize': plotfontsize})
 	#ax4inset.tick_params(labelsize=plotfontsize - 5)
 	ax4.set_xlabel(r'$K_T$ (GeV)', {'fontsize': plotfontsize + 5})
-	ax4.set_ylabel(r'$-\overline{R}^2_{ol}$ (fm$^2\!$)', {'fontsize': plotfontsize + 5, 'rotation': 90})
+	ax4.set_ylabel(r'$\overline{R}^2_{os,2}$ (fm$^2\!$)', {'fontsize': plotfontsize + 5, 'rotation': 90})
 	ax4.yaxis.set_label_position('right')
 	ax4.yaxis.tick_right()
 	ax4.yaxis.set_ticks_position('both')
-	ax4.text(0.85, 0.85,'(d)', transform=ax4.transAxes, fontsize=plotfontsize + 5)
+	ax4.text(0.85, 0.1,'(d)', transform=ax4.transAxes, fontsize=plotfontsize + 5)
 	
-	ax4.legend(loc='center right')
+	#ax4.legend(loc='center right')
 	# end of R2ol
 	
 	#plt.show()
