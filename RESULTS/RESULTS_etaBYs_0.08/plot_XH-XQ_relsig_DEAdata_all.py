@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 import mpl_toolkits.axes_grid.inset_locator as inloc
 
 mpi = 0.13957
-df_stem = ''
-#df_stem = '_no_df'
+#df_stem = ''
+df_stem = '_no_df'
 abs_stem = ''
 #abs_stem = '_w_abs'
 #neq_stem = ''
-neq_stem = '_neq0'
+neq_stem = '_COSneq0'
 eps = 1.e-15
 
 def relf(a,b):
@@ -37,11 +37,11 @@ def plot_relative_sigmas():
 	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + abs_stem + '.dat')[:,cols]
 
 	#R2os files
-	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_neq2' + '_no_df' + abs_stem + '.dat')[:,R2oscols]
-	LHLQR2osdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + abs_stem + '.dat')[:,R2oscols]
-	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + abs_stem + '.dat')[:,R2oscols]
-	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + abs_stem + '.dat')[:,R2oscols]
-	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + abs_stem + '.dat')[:,R2oscols]
+	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df' + abs_stem + '.dat')[:,R2oscols]
+	LHLQR2osdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscols]
+	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscols]
+	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscols]
+	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscols]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
@@ -94,7 +94,7 @@ def plot_relative_sigmas():
 	
 	# R2l
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = 0.99-1., 1.12-1.
+	ylower, yupper = 0.99-1., 0.125
 	pclower, pcupper = -40.0, 10.0
 	
 	ax3 = fig.add_subplot(223)
@@ -117,7 +117,7 @@ def plot_relative_sigmas():
 	
 	# R2ol
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -0.01, 0.09
+	ylower, yupper = -0.005, 0.075
 	pclower, pcupper = -20.0, 5.0
 	
 	ax4 = fig.add_subplot(224)
@@ -465,8 +465,8 @@ def plot_R2o_SVi_absolute_sigmas():
 
 if __name__ == "__main__":
 	#generate_all_plots()
-	#plot_relative_sigmas()	# used to be generate_all_plots()
-	plot_absolute_sigmas()
+	plot_relative_sigmas()	# used to be generate_all_plots()
+	#plot_absolute_sigmas()
 	#plot_R2o_SVi_relative_sigmas()
 	#plot_R2o_SVi_absolute_sigmas()
 

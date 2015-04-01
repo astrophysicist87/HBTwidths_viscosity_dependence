@@ -7,6 +7,8 @@ from scipy import stats
 
 nevs = 1000						# number of events to use in averaging of transverse flow profiles
 npts = 250						# number of points in tau at which to perform interpolation
+direc = 'NEW_TDEP_V1/NEW_TDEP_V1_'
+processingStem = 'nnINDEXED'				# tauSORTED, tauINDEXED, nnSORTED, or nnINDEXED
 interpolationmethod = 'linear'				# method of interpolation to use
 cols = [0, 1, 2]					# columns of input files: tau, vT, X
 eps = 0.000001
@@ -50,12 +52,12 @@ def get_mean_transverseflowprofile():
 	allXresults = empty([1, 3, npts])
 	allYresults = empty([1, 3, npts])
 	
-	processingStem = 'nnINDEXED'				# tauSORTED, tauINDEXED, nnSORTED, or nnINDEXED
+	#processingStem = 'nnINDEXED'				# tauSORTED, tauINDEXED, nnSORTED, or nnINDEXED
 	
 	for event in xrange(1, nevs+1):
 	    print 'Incorporating files from results-%(event)d/...' % {"event": event}
 	    #surfXdatafile = 'results-%(event)d/vT_vs_X_tauINDEXED.out' % {"event": event}
-	    surfXdatafile = 'results-%(event)d/vT_vs_X_%(pStem)s.out' % {"event": event, "pStem": processingStem}
+	    surfXdatafile = direc + 'results-%(event)d/vT_vs_X_%(pStem)s.out' % {"event": event, "pStem": processingStem}
 	
 	    surfXdata=loadtxt(surfXdatafile)
 	
@@ -93,7 +95,7 @@ def get_mean_transverseflowprofile():
 	#savetxt(outfile,asarray(Xmeans))
 	
 	#print 'Finished all.'
-	return asarray(Xmeans)
+	return asarray(Xmeans.T)
 
 
 
@@ -102,7 +104,7 @@ def get_mean_transverseflowprofile():
 
 def get_variance_transverseflowprofile(meansurfXdata):
 	allXresults = empty([1, 2, npts])
-	processingStem = 'nnINDEXED'				# tauSORTED, tauINDEXED, nnSORTED, or nnINDEXED
+	#processingStem = 'nnINDEXED'				# tauSORTED, tauINDEXED, nnSORTED, or nnINDEXED
 	
 	#meansurfXdatafile = 'testfinalX.out_%(npts)dpts' % {"npts": npts}
 	#meansurfXdatafile = 'mean_transverseflowprofile_%(pStem)s_%(numpts)dpts.out' % {"numpts": npts, "pStem": processingStem}
@@ -117,7 +119,7 @@ def get_variance_transverseflowprofile(meansurfXdata):
 	for event in xrange(1, nevs+1):
 	    print 'Incorporating files from results-%(event)d/...' % {"event": event}
 	    #surfXdatafile = 'results-%(event)d/vT_vs_X_INDEXED.out' % {"event": event}
-	    surfXdatafile = 'results-%(event)d/vT_vs_X_%(pStem)s.out' % {"event": event, "pStem": processingStem}
+	    surfXdatafile = direc + 'results-%(event)d/vT_vs_X_%(pStem)s.out' % {"event": event, "pStem": processingStem}
 	    surfXdata = loadtxt(surfXdatafile)[:, cols]
 	
 	    indicesX=mgrid[(min(surfXdata[:,0])+eps):(max(surfXdata[:,0])-eps):(npts)*(1j)]	# the two extra points will be deleted
@@ -165,11 +167,14 @@ def get_variance_transverseflowprofile(meansurfXdata):
 	meandists = runningsum/nn_count
 	vardists *= 2./(nn_count**2)
 	vardists += ((nn_count-1.)/(nn_count**2))*runningsum2
-	sigmadists = sqrt(vardists)
+	#sigmadists = sqrt(vardists)
+	sigmadists = sqrt(abs(vardists)) #abs
 	
 	# get normals along meansurfXdataSlice
 	meannormals = zeros(npts)
 	print 'Computing normals along mean surface curve...'
+	#print meansurfXdata.shape
+	#print meansurfXdataSlice.shape
 	for i in xrange(npts):
 	    meannormals[i] = get_normal_2D(meansurfXdataSlice, i)
 	
@@ -177,7 +182,7 @@ def get_variance_transverseflowprofile(meansurfXdata):
 	
 	possigma = nan_to_num(vstack((sigmadists*cos(phivec),sigmadists*sin(phivec))).transpose())
 	
-	print possigma
+	#print possigma
 	
 	finalXout = hstack((meansurfXdata, meansurfXdataSlice+possigma, meansurfXdataSlice-possigma))
 	

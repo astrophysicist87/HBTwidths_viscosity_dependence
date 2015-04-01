@@ -14,4 +14,5 @@ do
 	bash submit_jobs.sh $bvar1 $bvar2
 	#bash submit_get_anisotropic_flows_jobs.sh $bvar1 $bvar2
 	#bash submit_process_event_jobs.sh $bvar1 $bvar2
+	#bash submit_get_EdNd3p_cfs_jobs.sh $bvar1 $bvar2
 done

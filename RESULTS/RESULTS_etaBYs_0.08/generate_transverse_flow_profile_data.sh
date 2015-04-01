@@ -7,7 +7,7 @@
 nevs=$1
 TdepV=$2
 
-outfilename="History/generate_transverse_flow_profile_data_record_`date +%F`.out"
+outfilename="/home/plumberg.1/HBTwidths_viscosity_dependence/History/generate_transverse_flow_profile_data_record_`date +%F`.out"
 outfile=`get_filename $outfilename`		# get_filename checks to see if outfilename already exists
 						# and attaches an appropriate index to the end to ensure that it is a new file
 

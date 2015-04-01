@@ -7,10 +7,10 @@ import matplotlib as mpl
 
 mpl.rcParams['pdf.fonttype'] = 42
 
-#df_stem = ''
-df_stem = '_no_df'
+df_stem = ''
+#df_stem = '_no_df'
 #neq_stem = ''
-neq_stem = '_neq0'
+neq_stem = '_COSneq0'
 abs_stem = ''
 #abs_stem = '_w_abs'
 
@@ -45,11 +45,11 @@ def generate_all_plots():
 	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
 	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
 	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
-	idealR2osdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_neq2' + '_no_df.dat')[:,R2oscolsDEA]
-	LHLQR2osdataDEA=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + '.dat')[:,R2oscolsDEA]
-	LHHQR2osdataDEA=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + '.dat')[:,R2oscolsDEA]
-	HHLQR2osdataDEA=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + '.dat')[:,R2oscolsDEA]
-	HHHQR2osdataDEA=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	idealR2osdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df.dat')[:,R2oscolsDEA]
+	LHLQR2osdataDEA=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	LHHQR2osdataDEA=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	HHLQR2osdataDEA=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	HHHQR2osdataDEA=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
@@ -377,11 +377,11 @@ def generate_all_self_plots2():
 	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
 	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
 	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
-	idealR2osdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_neq2' + '_no_df' + abs_stem + '.dat')[:,R2oscolsDEA]
-	LHLQR2osdataDEA=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
-	LHHQR2osdataDEA=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
-	HHLQR2osdataDEA=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
-	HHHQR2osdataDEA=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
+	idealR2osdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df' + abs_stem + '.dat')[:,R2oscolsDEA]
+	LHLQR2osdataDEA=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
+	LHHQR2osdataDEA=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
+	HHLQR2osdataDEA=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
+	HHHQR2osdataDEA=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
@@ -466,20 +466,20 @@ def generate_all_self_plots2():
 	
 	# R2os
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -36.0, 19.0
+	ylower, yupper = -85.0, 19.0
 	
 	ax4 = fig.add_subplot(224)
 	
 	onezero=zeros(len(LHLQdata[:,0]))+1
-	onezero[0]=0.
+	#onezero[0]=0.
 	
 	ax4.axhline(0.0, color='black', linewidth=1)
 	
-	ax4.plot(LHLQdata[:,0], onezero*relf(LHLQR2osdataDEA[:,1],LHLQR2osdata[:,1]), linestyle='-', color='red', linewidth=3)
-	ax4.plot(LHHQdata[:,0], onezero*relf(LHHQR2osdataDEA[:,1],LHHQR2osdata[:,1],), linestyle=':', color='blue', linewidth=3)
-	ax4.plot(HHLQdata[:,0], onezero*relf(HHLQR2osdataDEA[:,1],HHLQR2osdata[:,1]), linestyle='-.', color='black', linewidth=3, label='HH-LQ')
-	ax4.plot(HHHQdata[:,0], onezero*relf(HHHQR2osdataDEA[:,1],HHHQR2osdata[:,1]), linestyle='--', color='green', linewidth=3, label='HH-HQ')
-	ax4.plot(idealdata[:,0], onezero*relf(idealR2osdataDEA[:,1],idealR2osdata[:,1]+1.e-15), linestyle='-', color='black', linewidth=3)
+	ax4.plot(LHLQdata[:,0], relf(LHLQR2osdataDEA[:,1],LHLQR2osdata[:,1]), linestyle='-', color='red', linewidth=3)
+	ax4.plot(LHHQdata[:,0], relf(LHHQR2osdataDEA[:,1],LHHQR2osdata[:,1],), linestyle=':', color='blue', linewidth=3)
+	ax4.plot(HHLQdata[:,0], relf(HHLQR2osdataDEA[:,1],HHLQR2osdata[:,1]), linestyle='-.', color='black', linewidth=3, label='HH-LQ')
+	ax4.plot(HHHQdata[:,0], relf(HHHQR2osdataDEA[:,1],HHHQR2osdata[:,1]), linestyle='--', color='green', linewidth=3, label='HH-HQ')
+	ax4.plot(idealdata[:,0], relf(idealR2osdataDEA[:,1],idealR2osdata[:,1]+1.e-15), linestyle='-', color='black', linewidth=3)
 	#print 'Problem?'
 
 	# update axes limits and axes labels

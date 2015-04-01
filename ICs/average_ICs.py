@@ -27,22 +27,23 @@ xgrid, ygrid = np.meshgrid(xpts, ypts)
 #phi = np.arctan2(ygrid,xgrid)
 #exp2iphi = np.exp((2.j)*phi)
 
-def xbar(data):
-	return np.sum(xgrid*data)
+def get_xbar(data):
+	return np.sum(xgrid*data)/np.sum(data)
 
-def ybar(data):
-	return np.sum(ygrid*data)
+def get_ybar(data):
+	return np.sum(ygrid*data)/np.sum(data)
 
-def r2(data,xbar,ybar):
+def get_r2(data,xbar,ybar):
 	return (xgrid-xbar)**2+(ygrid-ybar)**2
 
-def exp2iphi(data,xbar,ybar):
+def get_exp2iphi(data,xbar,ybar):
 	return np.exp((rotateorder*(1j))*(np.arctan2(ygrid-ybar,xgrid-xbar)))
 
 def get_eccentricity_phase(data):
-	xbar, ybar = xbar(data), ybar(data)
-	r2 = r2(data,xbar,ybar)
-	exp2iphi = exp2iphi(data,xbar,ybar)
+	xbar, ybar = get_xbar(data), get_ybar(data)
+	#print np.sum((xgrid-xbar)*data), np.sum((ygrid-ybar)*data)
+	r2 = get_r2(data,xbar,ybar)
+	exp2iphi = get_exp2iphi(data,xbar,ybar)
 	return np.angle(-np.sum(r2*exp2iphi*data)/np.sum(r2*data))/rotateorder
 
 
@@ -66,7 +67,7 @@ for i in xrange(1,nevs+1):
 
 
 sumdata/=float(nevs)
-np.savetxt('/home/plumberg.1/HBTwidths_viscosity_dependence/ICs/results-avg-rotated/sd_shifted_and_rotated_w_ecc_phases_avg_1000evs_block.dat', sumdata, fmt='%0.9f')
+np.savetxt('/home/plumberg.1/HBTwidths_viscosity_dependence/ICs/results-avg/sd_shifted_and_rotated_order%(o)d_avg_%(nevs)devs_block.dat' % {"o": int(rotateorder), "nevs": nevs}, sumdata, fmt='%0.9f')
 #np.savetxt('/home/plumberg.1/HBTwidths_viscosity_dependence/ICs/results-avg/sd_avg_1000evs_block.dat', sumdata, fmt='%0.9f')
 
 # End of file

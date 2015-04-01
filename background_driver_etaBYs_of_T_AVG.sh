@@ -8,7 +8,8 @@ ICsfolder=$basedirectory/ICs/results-avg
 hydrofolder=$basedirectory/$2/VISHNew
 HBTfolder=~/HBTPlumberg/process_event_src
 
-cp $ICsfolder/SCIENTIFIC_sd*block.dat $hydrofolder/Initial/InitialSd.dat
+ICfile=$ICsfolder/sd_shifted_and_rotated*_avg_1000evs_block.dat
+cp $ICfile $hydrofolder/Initial/InitialSd.dat
 
 outfilename="History/TDEPebs_results-avg_hydro_and_HBT_processing.out"
 outfile=`get_filename $outfilename`
@@ -47,14 +48,15 @@ CPvisflag=$3
 	echo '-------------------------------------------------------------' >> $hydrooutput
 	echo 'Beginning:' >> $hydrooutput
 	(cd $hydrofolder
-	./VISHNew.e IEOS=7 Edec=0.18 T0=0.6 vis=0.08 IINIT=2 iEin=1 iLS=130 factor=`echo $fitfactor` IVisflagINPUT=`echo $CPvisflag` >> $hydrooutput
+	nice -n 0 ./VISHNew.e IEOS=7 Edec=0.18 T0=0.6 vis=0.08 IINIT=2 iEin=1 iLS=130 factor=`echo $fitfactor` IVisflagINPUT=`echo $CPvisflag` >> $hydrooutput
 	#./VISHNew.e IEOS=7 Edec=0.18 T0=0.6 vis=`echo $myvis` IINIT=2 iEin=1 iLS=130 factor=`echo $fitfactor` IVisflagINPUT=0 >> $hydrofolder/results/RunRecord_results-avg_etaBYsTparm_`echo $CPvisflag`.txt
 	cd $basedirectory)
 	echo 'Finished hydro for eta/s(T), parametrization #' $CPvisflag 'and results-avg-1.' >> $outfile
-	cp $ICsfolder/sd*block.dat $hydrofolder/results/
-	outputfolder=$basedirectory/RESULTS/RESULTS_etaBYs_0.08/NEW_TDEP_V`echo $CPvisflag`/NEW_TDEP_V`echo $CPvisflag`_results-avg-1
-	#mv $hydrofolder/results $outputfolder
-	mv $hydrofolder/results $hydrofolder/TV`echo $CPvisflag`_results-avg-1
+	cp $ICfile $hydrofolder/results/
+	#outputfolder=$basedirectory/RESULTS/RESULTS_etaBYs_0.08/NEW_TDEP_V`echo $CPvisflag`/NEW_TDEP_V`echo $CPvisflag`_results-avg-1
+	outputfolder=$hydrofolder/NEW_TDEP_V`echo $CPvisflag`_results
+	mv $hydrofolder/results $outputfolder
+	#mv $hydrofolder/results $hydrofolder/TV`echo $CPvisflag`_results-avg-1
 	echo 'Finished running hydro for CPvisflag =' $CPvisflag
 	####################################################################################
 	#cp ~/HBTPlumberg/get_anisotropic_flows_src/get_anisotropic_flows $hydrofolder/TV`echo $CPvisflag`_results-avg-1/get_anisotropic_flows
@@ -65,12 +67,14 @@ CPvisflag=$3
 	#$hydrofolder/TV`echo $CPvisflag`_results-avg-1/process_event_w_df &
 	#$hydrofolder/TV`echo $CPvisflag`_results-avg-1/process_event_wo_df &
 	####################################################################################
-	#echo 'Moved hydro results to' $outputfolder >> $outfile
-	#echo '' >> $outfile
-	#echo 'Starting HBT calculations...' >> $outfile
-	#cp $HBTfolder/process_event $outputfolder/process_event
-	#$outputfolder/process_event $1 &
-	#echo 'Finished HBT calculations.' >> $outfile
+	echo 'Moved hydro results to' $outputfolder >> $outfile
+	echo '' >> $outfile
+	echo 'Starting HBT calculations...' >> $outfile
+	cp $HBTfolder/process_event_w_df_SHORT $outputfolder/process_event_w_df_SHORT
+	$outputfolder/process_event_w_df_SHORT &
+	cp $HBTfolder/process_event_wo_df_SHORT $outputfolder/process_event_wo_df_SHORT
+	$outputfolder/process_event_wo_df_SHORT &
+	echo 'Finished HBT calculations.' >> $outfile
 #done
 
 #\rm -rf $basedirectory/$2

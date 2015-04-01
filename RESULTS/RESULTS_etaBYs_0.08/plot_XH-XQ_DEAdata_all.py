@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 import mpl_toolkits.axes_grid.inset_locator as inloc
 
 mpi = 0.13957
-#df_stem = ''
-df_stem = '_no_df'
+df_stem = ''
+#df_stem = '_no_df'
 #neq_stem = ''
-neq_stem = '_neq0'
+neq_stem = '_COSneq0'
 
 def relf(a,b):
 	return 100.*(a-b)/b
@@ -33,11 +33,11 @@ def generate_all_plots():
 	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
 
 	#R2os files
-	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_neq2' + '_no_df.dat')[:,R2oscols]
-	LHLQR2osdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + '.dat')[:,R2oscols]
-	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + '.dat')[:,R2oscols]
-	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + '.dat')[:,R2oscols]
-	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_neq2' + df_stem + '.dat')[:,R2oscols]
+	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df.dat')[:,R2oscols]
+	LHLQR2osdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
