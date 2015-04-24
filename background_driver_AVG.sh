@@ -34,8 +34,8 @@ do
 	echo 'Moved hydro results to' $outputfolder >> $outfile
 	echo '' >> $outfile
 	echo 'Starting HBT calculations...' >> $outfile
-	cp $HBTfolder/process_event_w_df $outputfolder/process_event_w_df
-	$outputfolder/process_event_w_df &
+	#cp $HBTfolder/process_event_w_df $outputfolder/process_event_w_df
+	#$outputfolder/process_event_w_df &
 	cp $HBTfolder/process_event_wo_df $outputfolder/process_event_wo_df
 	$outputfolder/process_event_wo_df &
 	echo 'Finished HBT calculations.' >> $outfile

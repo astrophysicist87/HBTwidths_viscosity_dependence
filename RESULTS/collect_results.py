@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-# first command-line argument: value of shear viscosity (for choosing results folder to process)
+# first command-line argument: directory containing results sub-directories for processing
+# (assumed to being with 'RESULTS_')
 
 from numpy import *
 import sys
@@ -14,7 +15,8 @@ nKT = 21
 eps = 0.000001
 #df_stem = ''
 #df_stem = '_no_df'
-VEC_df_stem = ['', '_no_df']
+#VEC_df_stem = ['_no_df']
+VEC_df_stem = ['']
 abs_stem = ''
 #abs_stem = '_w_abs'
 HBTcolsC = [3, 5, 7, 9, 11, 13]

@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-# first argument: index of results folder
+# first argument: CPvisflag value
 # second argument: local copy of EBE-Node
 
 basedirectory=~/HBTwidths_viscosity_dependence
@@ -14,7 +14,7 @@ cp $ICfile $hydrofolder/Initial/InitialSd.dat
 outfilename="History/TDEPebs_results-avg_hydro_and_HBT_processing.out"
 outfile=`get_filename $outfilename`
 
-CPvisflag=$3
+CPvisflag=$1
 
 #for CPvisflag in 1 2 3 4
 #do
@@ -27,14 +27,18 @@ CPvisflag=$3
 	elif [[ "$CPvisflag" == "1" ]]
 	then
 		fitfactor=1.027
+		TVstring="LHLQ"
 	elif [[ "$CPvisflag" == "2" ]]
 	then
 		fitfactor=0.688
+		TVstring="LHHQ"
 	elif [[ "$CPvisflag" == "3" ]]
 	then
 		fitfactor=1.014
+		TVstring="HHLQ"
 	else
 		fitfactor=0.68
+		TVstring="HHHQ"
 	fi
 	#fitfactor=1.0
 	echo 'Working on eta/s(T), parametrization #' $CPvisflag'...' >> $outfile
@@ -54,10 +58,13 @@ CPvisflag=$3
 	echo 'Finished hydro for eta/s(T), parametrization #' $CPvisflag 'and results-avg-1.' >> $outfile
 	cp $ICfile $hydrofolder/results/
 	#outputfolder=$basedirectory/RESULTS/RESULTS_etaBYs_0.08/NEW_TDEP_V`echo $CPvisflag`/NEW_TDEP_V`echo $CPvisflag`_results-avg-1
-	outputfolder=$hydrofolder/NEW_TDEP_V`echo $CPvisflag`_results
+	#outputfolder=$hydrofolder/NEW_TDEP_V`echo $CPvisflag`_results
+	dir1=$basedirectory/RESULTS/RESULTS_etaBYs_`echo $TVstring`
+	individualResultsDirectory=results-avg-1
+	outputfolder=$dir1/$individualResultsDirectory
 	mv $hydrofolder/results $outputfolder
 	#mv $hydrofolder/results $hydrofolder/TV`echo $CPvisflag`_results-avg-1
-	echo 'Finished running hydro for CPvisflag =' $CPvisflag
+	echo 'Finished running hydro for (eta/s)(T) =' $TVstring
 	####################################################################################
 	#cp ~/HBTPlumberg/get_anisotropic_flows_src/get_anisotropic_flows $hydrofolder/TV`echo $CPvisflag`_results-avg-1/get_anisotropic_flows
 	#$hydrofolder/TV`echo $CPvisflag`_results-avg-1/get_anisotropic_flows &
@@ -70,13 +77,15 @@ CPvisflag=$3
 	echo 'Moved hydro results to' $outputfolder >> $outfile
 	echo '' >> $outfile
 	echo 'Starting HBT calculations...' >> $outfile
-	cp $HBTfolder/process_event_w_df_SHORT $outputfolder/process_event_w_df_SHORT
-	$outputfolder/process_event_w_df_SHORT &
-	cp $HBTfolder/process_event_wo_df_SHORT $outputfolder/process_event_wo_df_SHORT
-	$outputfolder/process_event_wo_df_SHORT &
+	cp $HBTfolder/process_event_w_df $outputfolder/process_event_w_df
+	$outputfolder/process_event_w_df &
+	cp $HBTfolder/process_event_wo_df $outputfolder/process_event_wo_df
+	$outputfolder/process_event_wo_df &
+	#cp $HBTfolder/process_event_wo_df_SHORT $outputfolder/process_event_wo_df_SHORT
+	#$outputfolder/process_event_wo_df_SHORT &
 	echo 'Finished HBT calculations.' >> $outfile
 #done
 
-#\rm -rf $basedirectory/$2
+\rm -rf $basedirectory/$2
 
 echo 'Finished all calculations.' >> $outfile

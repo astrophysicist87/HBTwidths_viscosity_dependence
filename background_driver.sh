@@ -13,7 +13,7 @@ cp $ICsfolder`echo $1`/sd_event_*_block.dat $hydrofolder/Initial/InitialSd.dat
 #for etaBYsval in 0.05 0.10 0.15 0.20
 #factor for ebs=0.00 is 1.155
 #factor for ebs=0.20 is 0.833
-for etaBYsval in 0.00
+for etaBYsval in 0.20
 do
 	outfilename="History/EBS_`echo $etaBYsval`_results-`echo $1`_hydro_processing.out"
 	outfile=`get_filename $outfilename`
@@ -24,7 +24,7 @@ do
 	mkdir $hydrofolder/results
 	echo 'Running hydro for eta/s =' $etaBYsval 'and results-'$1'...' >> $outfile
 	(cd $hydrofolder
-	nice -n 0 ./VISHNew.e IEOS=7 Edec=0.18 T0=0.6 vis=`echo $etaBYsval` IINIT=2 iEin=1 iLS=130 factor=1.155 IVisflagINPUT=0 >> $hydrofolder/results/RunRecord_results-`echo $1`_etaBYs_`echo $etaBYsval`.txt
+	nice -n 0 ./VISHNew.e IEOS=7 Edec=0.18 T0=0.6 vis=`echo $etaBYsval` IINIT=2 iEin=1 iLS=130 factor=0.833 IVisflagINPUT=0 >> $hydrofolder/results/RunRecord_results-`echo $1`_etaBYs_`echo $etaBYsval`.txt
 	cd $basedirectory)
 	echo 'Finished hydro for eta/s =' $etaBYsval 'and results-'$1'.' >> $outfile
 	#cp $ICsfolder`echo $1`/sd_event_*_block.dat $hydrofolder/results/
@@ -37,8 +37,8 @@ do
 	echo 'Starting HBT calculations...' >> $outfile
 	cp $HBTfolder/process_event_wo_df $outputfolder/process_event_wo_df
 	$outputfolder/process_event_wo_df
-	#cp $HBTfolder/process_event_w_df $outputfolder/process_event_w_df
-	#$outputfolder/process_event_w_df &
+	cp $HBTfolder/process_event_w_df $outputfolder/process_event_w_df
+	$outputfolder/process_event_w_df &
 	echo 'Finished HBT calculations.' >> $outfile
 done
 
