@@ -27,21 +27,21 @@ def generate_all_plots():
 	fig.subplots_adjust(wspace=0.0, hspace=0.0)
 	
 	idealdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + neq_stem + '_no_df.dat')[:,cols]
-	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
-	LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
-	HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
-	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
+	LHLQdata=loadtxt('../RESULTS_etaBYs_LHLQ/complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
+	LHHQdata=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
+	HHLQdata=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
+	HHHQdata=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
 
 	#R2os files
 	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df.dat')[:,R2oscols]
-	LHLQR2osdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
-	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
-	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
-	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	LHLQR2osdata=loadtxt('../RESULTS_etaBYs_LHLQ/complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	LHHQR2osdata=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	HHLQR2osdata=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	HHHQR2osdata=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = 2.5, 13.5
+	ylower, yupper = 3.0, 13.5
 	pclower, pcupper = -10.0, 100.0
 	
 	ax1 = fig.add_subplot(221)
@@ -63,7 +63,7 @@ def generate_all_plots():
 	
 	# R2o
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = 4.0, 33.5
+	ylower, yupper = 4.0, 32.5
 	pclower, pcupper = -25.0, 25.0
 	
 	ax2 = fig.add_subplot(222)
@@ -87,7 +87,7 @@ def generate_all_plots():
 	
 	# R2l
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -0.5, 149.0
+	ylower, yupper = -1.0, 149.0
 	pclower, pcupper = -40.0, 10.0
 	
 	ax3 = fig.add_subplot(223)
@@ -110,7 +110,7 @@ def generate_all_plots():
 	
 	# R2os
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -0.01, 0.5
+	ylower, yupper = -0.01, 0.6
 	pclower, pcupper = -20.0, 5.0
 	
 	ax4 = fig.add_subplot(224)
@@ -146,58 +146,8 @@ def generate_all_plots():
 	plt.savefig('R2ijDEA_vs_TDEPVX' + df_stem + '.pdf', format='pdf')
 
 
-
-
-def generate_R2o_SV_plot(col):
-	# set-up
-	plotfontsize = 12
-	relativesubplotsize = 0.125
-	cols = [0,2,8,5,10]	# KT, R2o, x2o, -2.*beta*xo t, beta^2*t^2, in that order
-	fig = plt.figure()
-	fig.subplots_adjust(wspace=0.0, hspace=0.0)
-	stringtexlist=['R^2_o', 'x^2_o', 'x_o t', 't^2']
-	stringfilelist=['R2o', 'x2o', 'xot', 't2']
-	
-	idealdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs.dat')[:,cols]
-	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,cols]
-	LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,cols]
-	HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,cols]
-	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,cols]
-	
-	factor=zeros([4,len(idealdata[:,0])])+1.
-	factor[2,:]=-2.*bT(idealdata[:,0])
-	factor[3,:]=bT(idealdata[:,0])**2
-	
-	xlower, xupper = 0.0, 2.0
-	ylower, yupper = 0.0, 32.5
-	pclower, pcupper = -25.0, 25.0
-	
-	ax1 = fig.add_subplot(111)
-
-	ax1.plot(idealdata[:,0], factor[col-1,:]*idealdata[:,col], linestyle='solid', color='black', linewidth=2, label='ideal')	
-	ax1.plot(LHLQdata[:,0], factor[col-1,:]*LHLQdata[:,col], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
-	ax1.plot(LHHQdata[:,0], factor[col-1,:]*LHHQdata[:,col], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
-	ax1.plot(HHLQdata[:,0], factor[col-1,:]*HHLQdata[:,col], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
-	ax1.plot(HHHQdata[:,0], factor[col-1,:]*HHHQdata[:,col], linestyle='--', color='green', linewidth=2, label='HH-HQ')
-	
-	# update axes limits and axes labels
-	ax1.axis([xlower, xupper, ylower, yupper])
-	#ax1.set_xticklabels([])
-	ax1.set_xlabel(r'$K_T$ (GeV)', {'fontsize': plotfontsize + 5})
-	#ax1.set_ylabel(r'$\left< \left<\tilde{x}^2_o \right> \!\right>_{\mathrm{ev}}$ (fm$^2\!$)', {'fontsize': plotfontsize + 5})
-	ax1.set_ylabel(r'$\left< %(stn)s \!\right>_{\mathrm{ev}}$ (fm$^2\!$)'% {'stn': stringtexlist[col-1]}, {'fontsize': plotfontsize + 5})
-	#ax1.text(0.85, 0.85,'(a)', transform=ax1.transAxes, fontsize=plotfontsize + 5)
-	
-	plt.show()
-	#print 'Saving plot as', '%(sn)sDEA_vs_TDEPVX.pdf' % {"sn": stringfilelist[col-1]}
-	#plt.savefig('%(sn)sDEA_vs_TDEPVX.pdf' % {"sn": stringfilelist[col-1]}, format='pdf')
-
-
-
 if __name__ == "__main__":
 	generate_all_plots()
-	#for idx in xrange(1,5):
-	#	generate_R2o_SV_plot(idx)
 
 
 

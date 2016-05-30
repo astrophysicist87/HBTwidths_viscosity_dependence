@@ -28,28 +28,28 @@ def generate_all_plots():
 	fig = plt.figure()
 	fig.subplots_adjust(wspace=0.0, hspace=0.0)
 	
-	idealdata=loadtxt('../RESULTS_etaBYs_0.00/SHIFTED_AND_results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_0')[:,cols1]
-	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_SHIFTED_AND_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
-	LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_SHIFTED_AND_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_cfs_0')[:,cols1]
-	HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_SHIFTED_AND_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_cfs_0')[:,cols1]
-	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_SHIFTED_AND_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_cfs_0')[:,cols1]
+	idealdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_0')[:,cols1]
+	LHLQdata=loadtxt('../RESULTS_etaBYs_LHLQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
+	LHHQdata=loadtxt('../RESULTS_etaBYs_LHHQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
+	HHLQdata=loadtxt('../RESULTS_etaBYs_HHLQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
+	HHHQdata=loadtxt('../RESULTS_etaBYs_HHHQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
 	idealdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + neq_stem + '.dat')[:,cols2]
-	LHLQdataDEA=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + '.dat')[:,cols2]
-	LHHQdataDEA=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + '.dat')[:,cols2]
-	HHLQdataDEA=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + '.dat')[:,cols2]
-	HHHQdataDEA=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + '.dat')[:,cols2]
+	LHLQdataDEA=loadtxt('../RESULTS_etaBYs_LHLQ/complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols2]
+	LHHQdataDEA=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols2]
+	HHLQdataDEA=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols2]
+	HHHQdataDEA=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols2]
 
 	#R2os files
-	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_2')[:,R2oscols]
-	LHLQR2osdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
-	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
-	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
-	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_2')[:,R2oscols]
+	LHLQR2osdata=loadtxt('../RESULTS_etaBYs_LHLQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	LHHQR2osdata=loadtxt('../RESULTS_etaBYs_LHHQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	HHLQR2osdata=loadtxt('../RESULTS_etaBYs_HHLQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	HHHQR2osdata=loadtxt('../RESULTS_etaBYs_HHHQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
 	idealR2osdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df.dat')[:,R2oscolsDEA]
-	LHLQR2osdataDEA=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
-	LHHQR2osdataDEA=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
-	HHLQR2osdataDEA=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
-	HHHQR2osdataDEA=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	LHLQR2osdataDEA=loadtxt('../RESULTS_etaBYs_LHLQ/complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	LHHQR2osdataDEA=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	HHLQR2osdataDEA=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	HHHQR2osdataDEA=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
@@ -360,32 +360,32 @@ def generate_all_self_plots2():
 	fig = plt.figure()
 	fig.subplots_adjust(wspace=0.0, hspace=0.0)
 	
-	idealdata=loadtxt('../RESULTS_etaBYs_0.00/SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_0')[:,cols1]
-	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
-	LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
-	HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
-	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
-	idealdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + neq_stem + '_no_df' + abs_stem + '.dat')[:,cols2new]
-	LHLQdataDEA=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + abs_stem + '.dat')[:,cols2new]
-	LHHQdataDEA=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + abs_stem + '.dat')[:,cols2new]
-	HHLQdataDEA=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + abs_stem + '.dat')[:,cols2new]
-	HHHQdataDEA=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + neq_stem + df_stem + abs_stem + '.dat')[:,cols2new]
+	idealdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_0')[:,cols1]
+	LHLQdata=loadtxt('../RESULTS_etaBYs_LHLQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
+	LHHQdata=loadtxt('../RESULTS_etaBYs_LHHQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
+	HHLQdata=loadtxt('../RESULTS_etaBYs_HHLQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
+	HHHQdata=loadtxt('../RESULTS_etaBYs_HHHQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_0')[:,cols1]
+	idealdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + neq_stem + '_no_df.dat')[:,cols2new]
+	LHLQdataDEA=loadtxt('../RESULTS_etaBYs_LHLQ/complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols2new]
+	LHHQdataDEA=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols2new]
+	HHLQdataDEA=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols2new]
+	HHHQdataDEA=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols2new]
 
 	#R2os files
-	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_2')[:,R2oscols]
-	LHLQR2osdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
-	LHHQR2osdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
-	HHLQR2osdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
-	HHHQR2osdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_SHIFTED_AND_ROTATED_results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
-	idealR2osdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df' + abs_stem + '.dat')[:,R2oscolsDEA]
-	LHLQR2osdataDEA=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
-	LHHQR2osdataDEA=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
-	HHLQR2osdataDEA=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
-	HHHQR2osdataDEA=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs' + '_SINneq2' + df_stem + abs_stem + '.dat')[:,R2oscolsDEA]
+	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/results-avg-1/HBTradii_cfs_ev1_no_df.dat_neqn_cfs_2')[:,R2oscols]
+	LHLQR2osdata=loadtxt('../RESULTS_etaBYs_LHLQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	LHHQR2osdata=loadtxt('../RESULTS_etaBYs_LHHQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	HHLQR2osdata=loadtxt('../RESULTS_etaBYs_HHLQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	HHHQR2osdata=loadtxt('../RESULTS_etaBYs_HHHQ/results-avg-1/HBTradii_cfs_ev1' + df_stem + '.dat_neqn_cfs_2')[:,R2oscols]
+	idealR2osdataDEA=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df.dat')[:,R2oscolsDEA]
+	LHLQR2osdataDEA=loadtxt('../RESULTS_etaBYs_LHLQ/complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	LHHQR2osdataDEA=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	HHLQR2osdataDEA=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
+	HHHQR2osdataDEA=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscolsDEA]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -4.9, 17.9
+	ylower, yupper = -9.9, 25.0
 	
 	ax1 = fig.add_subplot(221)
 	
@@ -406,14 +406,14 @@ def generate_all_self_plots2():
 	ax1.axis([xlower, xupper, ylower, yupper])
 	ax1.set_xticklabels([])
 	ax1.set_ylabel(r'$\left< R^2_{s} \!\right> / \bar{R}^2_{s} - 1$ (%)', {'fontsize': plotfontsize+3})
-	ax1.text(0.85, 0.85,'(a)', transform=ax1.transAxes, fontsize=plotfontsize + 5)
-	#ax1.text(0.05, 0.85,'(a)', transform=ax1.transAxes, fontsize=plotfontsize + 5)
+	#ax1.text(0.85, 0.85,'(a)', transform=ax1.transAxes, fontsize=plotfontsize + 5)
+	ax1.text(0.05, 0.85,'(a)', transform=ax1.transAxes, fontsize=plotfontsize + 5)
 	
 	# end of R2s
 	
 	# R2o
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -4.9, 17.9
+	ylower, yupper = -4.9, 21.0
 	
 	ax2 = fig.add_subplot(222)
 	
@@ -432,15 +432,15 @@ def generate_all_self_plots2():
 	ax2.yaxis.set_label_position('right')
 	ax2.yaxis.tick_right()
 	ax2.yaxis.set_ticks_position('both')
-	ax2.text(0.85, 0.85,'(b)', transform=ax2.transAxes, fontsize=plotfontsize + 5)
-	#ax2.text(0.05, 0.85,'(b)', transform=ax2.transAxes, fontsize=plotfontsize + 5)
+	#ax2.text(0.85, 0.85,'(b)', transform=ax2.transAxes, fontsize=plotfontsize + 5)
+	ax2.text(0.05, 0.85,'(b)', transform=ax2.transAxes, fontsize=plotfontsize + 5)
 	
-	ax2.legend(loc='upper left')
+	ax2.legend(loc='upper right')
 	# end of R2o
 	
 	# R2l
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -9.0, 4.0
+	ylower, yupper = -9.9, 4.9
 	
 	ax3 = fig.add_subplot(223)
 	
@@ -466,7 +466,7 @@ def generate_all_self_plots2():
 	
 	# R2os
 	xlower, xupper = 0.0, 2.0
-	ylower, yupper = -85.0, 19.0
+	ylower, yupper = -139.9, 19.0
 	
 	ax4 = fig.add_subplot(224)
 	
@@ -497,8 +497,8 @@ def generate_all_self_plots2():
 	ax4.legend(loc='lower center')
 	# end of R2ol
 	
-	#plt.show()
-	plt.savefig('R2ij_reldevabs_SSHvsDEA_vs_TDEPVX' + df_stem + abs_stem + '.pdf', format='pdf')
+	plt.show()
+	#plt.savefig('R2ij_reldevabs_SSHvsDEA_vs_TDEPVX' + df_stem + abs_stem + '.pdf', format='pdf')
 
 #####################################################################################################################
 #####################################################################################################################
@@ -519,17 +519,17 @@ def generate_SV_self_plots():
 	fig = plt.figure()
 	fig.subplots_adjust(wspace=0.0, hspace=0.0)
 	
-	LHLQdataradii=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,[5,13]]
-	LHHQdataradii=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,[5,13]]
-	HHLQdataradii=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,[5,13]]
+	LHLQdataradii=loadtxt('../RESULTS_etaBYs_LHLQ/results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,[5,13]]
+	LHHQdataradii=loadtxt('../RESULTS_etaBYs_LHHQ/results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,[5,13]]
+	HHLQdataradii=loadtxt('../RESULTS_etaBYs_HHLQ/results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,[5,13]]
 	HHHQdataradii=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_results-avg-1/HBTradii_cfs_ev1.dat_cfs_0')[:,[5,13]]
 	LHLQdataDEAradii=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,[2,4]]
 	LHHQdataDEAradii=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,[2,4]]
 	HHLQdataDEAradii=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,[2,4]]
 	HHHQdataDEAradii=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,[2,4]]
-	LHLQdata=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_results-avg-1/Sourcefunction_variances_cfs_COS.dat_cfs_0')[:,cols1]
-	LHHQdata=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_results-avg-1/Sourcefunction_variances_cfs_COS.dat_cfs_0')[:,cols1]
-	HHLQdata=loadtxt('NEW_TDEP_V3/NEW_TDEP_V3_results-avg-1/Sourcefunction_variances_cfs_COS.dat_cfs_0')[:,cols1]
+	LHLQdata=loadtxt('../RESULTS_etaBYs_LHLQ/results-avg-1/Sourcefunction_variances_cfs_COS.dat_cfs_0')[:,cols1]
+	LHHQdata=loadtxt('../RESULTS_etaBYs_LHHQ/results-avg-1/Sourcefunction_variances_cfs_COS.dat_cfs_0')[:,cols1]
+	HHLQdata=loadtxt('../RESULTS_etaBYs_HHLQ/results-avg-1/Sourcefunction_variances_cfs_COS.dat_cfs_0')[:,cols1]
 	HHHQdata=loadtxt('NEW_TDEP_V4/NEW_TDEP_V4_results-avg-1/Sourcefunction_variances_cfs_COS.dat_cfs_0')[:,cols1]
 	LHLQdataDEA=loadtxt('NEW_TDEP_V1/NEW_TDEP_V1_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,cols2]
 	LHHQdataDEA=loadtxt('NEW_TDEP_V2/NEW_TDEP_V2_complete_FOsurface_properties_etaBYs_0.08_1000evs.dat')[:,cols2]

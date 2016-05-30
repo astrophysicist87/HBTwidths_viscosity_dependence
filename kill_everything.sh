@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # get original pid for submitting job
-PID1=`greppid wrapper_submit_jobs | awk '{print $2}'`
+PID1=`greppid wrapper_submit_ebs_jobs | awk '{print $2}'`
 
 # get pid for job submitted by PID1
 PID2=`ps -ef | awk -v pid=$PID1 '$3==pid' | awk '{print $2}'`
@@ -29,5 +29,6 @@ kill -9 $PID2 &> /dev/null
 echo '   --> Killing sub-jobs...'
 kill -9 $PID3 &> /dev/null
 echo '   --> Killing all sub-processes still running...'
-kill -9 $PID4 &> /dev/null
+#kill -9 $PID4 &> /dev/null
+pkill source_variance &> /dev/null
 echo 'Killed everything.'

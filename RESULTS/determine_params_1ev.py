@@ -33,3 +33,4 @@ vT2_denom = sum(vT2_denom_integ)
 #print "r^2:",r2_num/r2_denom
 #print "vT^2:",vT2_num/vT2_denom
 print r2_num/r2_denom, vT2_num/vT2_denom
+print "sqrt(<vT^2>) = ", sqrt(vT2_num/vT2_denom)

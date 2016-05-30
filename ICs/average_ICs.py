@@ -56,18 +56,22 @@ for i in xrange(1,nevs+1):
 	filename=glob.glob('/home/plumberg.1/HBTwidths_viscosity_dependence/ICs/results-%(ev)d/sd*dat' % {"ev": i})[0]
 	data=np.loadtxt(filename)
 	#print sum(sum(np.loadtxt(filename))), sum(sum(sni.rotate(np.loadtxt(filename), anglerange*np.random.random_sample()+anglemin,reshape=False,order=0)))
+	xbar, ybar = get_xbar(data), get_ybar(data)
 	if rotateorder != 0:
 		angle = get_eccentricity_phase(data)
 	else:
 		angle = anglerange*np.random.random_sample()+anglemin
 	#print angle
-	sumdata+=sni.rotate(data, np.rad2deg(angle), reshape=False, order=0)
+	#print data.shape
+	shiftedData = sni.shift(data, [-ybar/dy, -xbar/dx], order=1)
+	#print get_xbar(data), get_ybar(data), get_xbar(shiftedData), get_ybar(shiftedData)
+	sumdata+=sni.rotate(shiftedData, np.rad2deg(angle), reshape=False, order=1)
 	print 'Included results-%(ev)d/sd*dat' % {"ev": i}
 
 
 
 sumdata/=float(nevs)
-np.savetxt('/home/plumberg.1/HBTwidths_viscosity_dependence/ICs/results-avg/sd_shifted_and_rotated_order%(o)d_avg_%(nevs)devs_block.dat' % {"o": int(rotateorder), "nevs": nevs}, sumdata, fmt='%0.9f')
+np.savetxt('/home/plumberg.1/HBTwidths_viscosity_dependence/ICs/results-avg/BUGFIXED2_sd_shifted_and_rotated_order%(o)d_avg_%(nevs)devs_block.dat' % {"o": int(rotateorder), "nevs": nevs}, sumdata.T, fmt='%0.9f')
 #np.savetxt('/home/plumberg.1/HBTwidths_viscosity_dependence/ICs/results-avg/sd_avg_1000evs_block.dat', sumdata, fmt='%0.9f')
 
 # End of file
