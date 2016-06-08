@@ -26,18 +26,18 @@ def generate_all_plots():
 	fig = plt.figure()
 	fig.subplots_adjust(wspace=0.0, hspace=0.0)
 	
-	idealdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + neq_stem + '_no_df.dat')[:,cols]
-	LHLQdata=loadtxt('../RESULTS_etaBYs_LHLQ/complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
-	LHHQdata=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
-	HHLQdata=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
-	HHHQdata=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
+	#idealdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + neq_stem + '_no_df.dat')[:,cols]
+	LHLQdata=loadtxt('.//complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
+	#LHHQdata=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
+	#HHLQdata=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
+	#HHHQdata=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + neq_stem + df_stem + '.dat')[:,cols]
 
 	#R2os files
-	idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df.dat')[:,R2oscols]
-	LHLQR2osdata=loadtxt('../RESULTS_etaBYs_LHLQ/complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
-	LHHQR2osdata=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
-	HHLQR2osdata=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
-	HHHQR2osdata=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	#idealR2osdata=loadtxt('../RESULTS_etaBYs_0.00/complete_FOsurface_properties_etaBYs_0.00_1000evs' + '_SINneq2' + '_no_df.dat')[:,R2oscols]
+	LHLQR2osdata=loadtxt('./complete_FOsurface_properties_etaBYs_LHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	#LHHQR2osdata=loadtxt('../RESULTS_etaBYs_LHHQ/complete_FOsurface_properties_etaBYs_LHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	#HHLQR2osdata=loadtxt('../RESULTS_etaBYs_HHLQ/complete_FOsurface_properties_etaBYs_HHLQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
+	#HHHQR2osdata=loadtxt('../RESULTS_etaBYs_HHHQ/complete_FOsurface_properties_etaBYs_HHHQ_1000evs' + '_SINneq2' + df_stem + '.dat')[:,R2oscols]
 	
 	# R2s
 	xlower, xupper = 0.0, 2.0
@@ -47,10 +47,10 @@ def generate_all_plots():
 	ax1 = fig.add_subplot(221)
 
 	ax1.plot(LHLQdata[:,0], LHLQdata[:,1], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
-	ax1.plot(LHHQdata[:,0], LHHQdata[:,1], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
-	ax1.plot(HHLQdata[:,0], HHLQdata[:,1], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
-	ax1.plot(HHHQdata[:,0], HHHQdata[:,1], linestyle='--', color='green', linewidth=2, label='HH-HQ')
-	ax1.plot(idealdata[:,0], idealdata[:,1], linestyle='solid', color='black', linewidth=1, label='ideal')	
+	#ax1.plot(LHHQdata[:,0], LHHQdata[:,1], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
+	#ax1.plot(HHLQdata[:,0], HHLQdata[:,1], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
+	#ax1.plot(HHHQdata[:,0], HHHQdata[:,1], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	#ax1.plot(idealdata[:,0], idealdata[:,1], linestyle='solid', color='black', linewidth=1, label='ideal')	
 	
 	# update axes limits and axes labels
 	ax1.axis([xlower, xupper, ylower, yupper])
@@ -69,10 +69,10 @@ def generate_all_plots():
 	ax2 = fig.add_subplot(222)
 	
 	ax2.plot(LHLQdata[:,0], LHLQdata[:,2], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
-	ax2.plot(LHHQdata[:,0], LHHQdata[:,2], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
-	ax2.plot(HHLQdata[:,0], HHLQdata[:,2], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
-	ax2.plot(HHHQdata[:,0], HHHQdata[:,2], linestyle='--', color='green', linewidth=2, label='HH-HQ')
-	ax2.plot(idealdata[:,0], idealdata[:,2], linestyle='solid', color='black', linewidth=1, label='ideal')	
+	#ax2.plot(LHHQdata[:,0], LHHQdata[:,2], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
+	#ax2.plot(HHLQdata[:,0], HHLQdata[:,2], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
+	#ax2.plot(HHHQdata[:,0], HHHQdata[:,2], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	#ax2.plot(idealdata[:,0], idealdata[:,2], linestyle='solid', color='black', linewidth=1, label='ideal')	
 	
 	# update axes limits and axes labels
 	ax2.axis([xlower, xupper, ylower, yupper])
@@ -93,10 +93,10 @@ def generate_all_plots():
 	ax3 = fig.add_subplot(223)
 	
 	ax3.plot(LHLQdata[:,0], LHLQdata[:,3], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
-	ax3.plot(LHHQdata[:,0], LHHQdata[:,3], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
-	ax3.plot(HHLQdata[:,0], HHLQdata[:,3], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
-	ax3.plot(HHHQdata[:,0], HHHQdata[:,3], linestyle='--', color='green', linewidth=2, label='HH-HQ')
-	ax3.plot(idealdata[:,0], idealdata[:,3], linestyle='solid', color='black', linewidth=1, label='ideal')	
+	#ax3.plot(LHHQdata[:,0], LHHQdata[:,3], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
+	#ax3.plot(HHLQdata[:,0], HHLQdata[:,3], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
+	#ax3.plot(HHHQdata[:,0], HHHQdata[:,3], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	#ax3.plot(idealdata[:,0], idealdata[:,3], linestyle='solid', color='black', linewidth=1, label='ideal')	
 	
 	# update axes limits and axes labels
 	ax3.axis([xlower, xupper, ylower, yupper])
@@ -122,10 +122,10 @@ def generate_all_plots():
 	#ax4.plot(idealdata[:,0], -idealdata[:,4], linestyle='solid', color='black', linewidth=1, label='ideal')
 
 	ax4.plot(LHLQR2osdata[:,0], LHLQR2osdata[:,1], linestyle='solid', color='red', linewidth=2, label='LH-LQ')
-	ax4.plot(LHHQR2osdata[:,0], LHHQR2osdata[:,1], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
-	ax4.plot(HHLQR2osdata[:,0], HHLQR2osdata[:,1], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
-	ax4.plot(HHHQR2osdata[:,0], HHHQR2osdata[:,1], linestyle='--', color='green', linewidth=2, label='HH-HQ')
-	ax4.plot(idealR2osdata[:,0], idealR2osdata[:,1], linestyle='solid', color='black', linewidth=1, label='ideal')	
+	#ax4.plot(LHHQR2osdata[:,0], LHHQR2osdata[:,1], linestyle=':', color='blue', linewidth=2, label='LH-HQ')
+	#ax4.plot(HHLQR2osdata[:,0], HHLQR2osdata[:,1], linestyle='-.', color='black', linewidth=2, label='HH-LQ')
+	#ax4.plot(HHHQR2osdata[:,0], HHHQR2osdata[:,1], linestyle='--', color='green', linewidth=2, label='HH-HQ')
+	#ax4.plot(idealR2osdata[:,0], idealR2osdata[:,1], linestyle='solid', color='black', linewidth=1, label='ideal')	
 	
 	onezero=zeros(len(LHLQR2osdata[:,0]))+1
 	onezero[0]=0.
@@ -142,8 +142,8 @@ def generate_all_plots():
 	
 	# end of R2ol
 	
-	#plt.show()
-	plt.savefig('R2ijDEA_vs_TDEPVX' + df_stem + '.pdf', format='pdf')
+	plt.show()
+	#plt.savefig('R2ijDEA_vs_TDEPVX' + df_stem + '.pdf', format='pdf')
 
 
 if __name__ == "__main__":
